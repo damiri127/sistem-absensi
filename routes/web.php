@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,4 +19,4 @@ Route::get('/', function () {
 });
 
 // test authentication
-Route::post('/login', [LoginController::class, 'authentication']);
+Route::post('/login', [LoginController::class, 'authenticate']);
