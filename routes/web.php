@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('login');
 });
+
+// test authentication
+Route::post('/login', [LoginController::class, 'authentication']);
