@@ -36,7 +36,8 @@
 									</p>
 								</div> -->
 			      	</div>
-							<form action="#" class="signin-form">
+							<form action="\login" method="POST" class="signin-form">
+								@csrf
 			      		<div class="form-group mt-3">
 			      			<input type="text" class="form-control" name="email" required>
 			      			<label class="form-control-placeholder" for="username">Email</label>

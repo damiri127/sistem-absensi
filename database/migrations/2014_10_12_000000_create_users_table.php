@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->date('tanggal_lahir');
             $table->string('tempat_lahir');
             $table->enum('level',['Admin','Guru','Kepala Sekolah','Tata Usaha']);
