@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-  	<title>Login 05</title>
+  	<title>Sistem Absensi Guru - SMKS TELADAN KERTASMAYA</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -11,6 +11,7 @@
 	
 	<link rel="stylesheet" href="{{asset("asset_login/login-form-15/css/style.css")}}">
 
+    <link rel="icon" href="{{url('login-form-22/img/logo.jpg')}}" type="image/x-icon">
 	</head>
 	<body style="background: rgb(255, 251, 251);">
 	<section class="ftco-section">
