@@ -10,8 +10,8 @@
                 <h5 class="text-white op-7 mb-2">Sistem  Absensi Guru SMKS Teladan Kertasmaya</h5>
             </div>
             <div class="ml-md-auto py-2 py-md-0">
-                <a href="#" class="btn btn-white btn-border btn-round mr-2">Informasi Absensi</a>
-                <a href="#" class="btn btn-secondary btn-round">Data Pengguna</a>
+                <a href="#" class="btn btn-white btn-border btn-round mr-2">Profil Saya</a>
+                <a href="#" class="btn btn-secondary btn-round">Informasi Absensi</a>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@
 										<div class="col-7 col-stats">
 											<div class="numbers">
 												<p class="card-category">Jadwal Belajar</p>
-												<h4 class="card-title">100</h4>
+												<a href="#"><h4 class="card-title">100</h4></a>
 											</div>
 										</div>
 									</div>
