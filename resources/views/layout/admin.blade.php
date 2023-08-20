@@ -116,7 +116,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item active">
-							<a href="/"  aria-expanded="false">
+							<a href="/admin"  aria-expanded="false">
 								<i class="fas fa-home"></i>
 								<p>Beranda</p>
 								<!-- <span class="caret"></span> -->
