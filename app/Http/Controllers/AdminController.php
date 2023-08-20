@@ -14,7 +14,7 @@ class AdminController extends Controller
         return (view('admin.mengelola_admin'));
     }
 
-    public function tambah_admin(){
-        return view('');
+    public function form_tambah_admin(){
+        return (view('admin.tambah_data_admin'));
     }
 }

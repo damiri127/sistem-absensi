@@ -137,7 +137,7 @@
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="admin/mengelola_admin">
+										<a href="/admin/mengelola_admin">
 											<span class="sub-item">Admin</span>
 										</a>
 									</li>

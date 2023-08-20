@@ -1,10 +1,10 @@
 @extends('layout.admin')
 @section('content')
     <div class="page-inner">
-        <a href="#" class="btn btn-primary"><i class="fas fa-plus"></i>     Tambah</a>
+        <a href="/admin/tambah_data_admin" class="btn btn-primary"><i class="fas fa-plus"></i>     Tambah</a>
         <div class="card mt-3">
             <div class="card-header">
-                <h4 class="card-title">Basic</h4>
+                <h4 class="card-title">Data Admin</h4>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
