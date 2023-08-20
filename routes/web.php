@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::get('/admin/mengelola_admin', [AdminController::class, 'mengelola_admin'])->name('mengelola_admmin');
 Route::get('/admin',[AdminController::class, 'index'])->name('admin_dashboard');
 Route::get('/admin/tambah_data_admin',[AdminController::class, 'form_tambah_admin'])->name('tambah_data_admin');
+Route::post('/admin/tambah_admin', [AdminController::class, 'tambah_admin'])->name('tambah_admi');
 
 // test authentication
 Route::post('/login', [LoginController::class, 'authenticate']);
