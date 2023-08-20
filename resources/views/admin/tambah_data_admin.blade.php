@@ -8,7 +8,8 @@
                 <h2>Tambah Data Admin</h2>
             </div>
             <div class="card-body">
-                <form action="#">
+                <form action="/admin/tambah_admin" method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
                         <label for="inputNama">Nama</label>
                         <input id="inputNama" type="text" name="nama" class="form-control" placeholder="Masukan Nama Admin">
