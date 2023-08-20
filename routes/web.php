@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
@@ -17,6 +18,8 @@ use App\Http\Controllers\LoginController;
 Route::get('/', function () {
     return view('login');
 });
+Route::get('/admin/mengelola_admin', [AdminController::class, 'mengelola_admin'])->name('mengelola_admmin');
+Route::get('/admin',[AdminController::class, 'index'])->name('admin_dashboard');
 
 // test authentication
 Route::post('/login', [LoginController::class, 'authenticate']);

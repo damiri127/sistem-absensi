@@ -116,7 +116,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item active">
-							<a data-toggle="collapse" href="#dashboard" class="collapsed" aria-expanded="false">
+							<a href="/"  aria-expanded="false">
 								<i class="fas fa-home"></i>
 								<p>Beranda</p>
 								<!-- <span class="caret"></span> -->
@@ -137,7 +137,7 @@
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="components/avatars.html">
+										<a href="admin/mengelola_admin">
 											<span class="sub-item">Admin</span>
 										</a>
 									</li>
@@ -204,7 +204,7 @@
 							</div>
 						</li>
 						<li class="nav-item">
-							<a data-toggle="collapse" href="#forms">
+							<a href="#forms">
 								<i class="fas fa-pen-square"></i>
 								<p>Data Absensi</p>
 							</a>
