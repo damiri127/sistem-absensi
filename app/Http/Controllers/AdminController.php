@@ -47,4 +47,17 @@ class AdminController extends Controller
 
         return view('admin.edit_data_admin',['data'=>$data]);
     }
+
+    function info_admin(Request $request){
+        $data = DB::table('users')->where('id',$request->id )->first();
+
+        return view('admin.info_admin',['data'=>$data]);
+    }
+
+    function hapus_admin(Request $request){
+        $data2 = User::find($request->id);
+        $data2->delete();
+
+        return redirect()->back();
+    }
 }
