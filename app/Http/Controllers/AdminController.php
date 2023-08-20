@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -16,5 +17,25 @@ class AdminController extends Controller
 
     public function form_tambah_admin(){
         return (view('admin.tambah_data_admin'));
+    }
+
+    public function tambah_data_admin(Request $request){
+        $data = new User();
+        $data->nama = $request->nama;
+        $data->email = $request->email;
+        $data->image = $request->image;
+        $data->tanggal_lahir = $request->tanggal_lahir;
+        $data->tempat_lahir = $request->tempat_lahir;
+        $data->level = $request->level;
+        $data->password = bcrypt($request->password);
+
+        if($request->hasFile('image')){
+            $request->file('image')->move('alamatfoto/', $request->file('image')->getClientOriginalName());
+            $data->image = $request->file('image')->getClientOriginalName();
+            $data->save();
+        }else{
+            $data->save();
+        }
+        return redirect('admin/mengelola_admin')->withSuccess('Data berhasil ditambahkan');
     }
 }
