@@ -46,23 +46,32 @@ class AdminController extends Controller
     
     function form_edit_admin(Request $request){
         $data = DB::table('users')->where('id', $request->id)->first();
-
-        return view('admin.edit_data_admin',['data'=>$data]);
-        $data = DB::table('users')->where('id',$request->id )->first();
         $title = "Edit Data Admin $data->nama";
         return view('admin.edit_data_admin',['data'=>$data, 'title'=>$title]);
     }
 
+    function edit_admin(Request $request, $id){
+        $data = User::find($id);
+        $data->nama = $request->nama;
+        $data->email = $request->email;
+        $data->image = $request->image;
+        $data->tanggal_lahir = $request->tanggal_lahir;
+        $data->tempat_lahir = $request->tempat_lahir;
+        $data->password = bcrypt($request->password);
+        $data->save();
+
+        return redirect('admin/mengelola_admin')->withSuccess('Data berhasil diubah');
+    }
+
     function info_admin(Request $request){
         $data = DB::table('users')->where('id',$request->id )->first();
-
-        return view('admin.info_admin',['data'=>$data]);
+        $title = "Info Admin $data->nama";
+        return view('admin.info_admin',['data'=>$data, 'title'=>$title]);
     }
 
     function hapus_admin(Request $request){
         $data2 = User::find($request->id);
         $data2->delete();
-
         return redirect()->back();
     }
 }
