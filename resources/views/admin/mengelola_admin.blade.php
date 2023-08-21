@@ -33,7 +33,7 @@
                                     <td>{{ $item->email }}</td>
                                     <td>
                                         <a href="/admin/info_admin/{{$item->id}}" class="btn btn-sm btn-info"><i class="fa fa-info-circle"></i> <span>Info</span></a>
-                                        <a href="/admin/edit_data_admin/{{$item->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>
+                                        <a href="/admin/edit_data_admin/{{$loop->iteration}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>
                                         <a href="/admin/hapus_admin/{{$item->id}}" class="btn btn-sm btn-danger" id="hapus_data"><i class="fas fa-trash-alt"></i> <span>Hapus</span></a>
                                     </td>
                                 </tr>

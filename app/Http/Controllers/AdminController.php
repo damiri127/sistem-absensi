@@ -45,6 +45,9 @@ class AdminController extends Controller
     }
     
     function form_edit_admin(Request $request){
+        $data = DB::table('users')->where('id', $request->id)->first();
+
+        return view('admin.edit_data_admin',['data'=>$data]);
         $data = DB::table('users')->where('id',$request->id )->first();
         $title = "Edit Data Admin $data->nama";
         return view('admin.edit_data_admin',['data'=>$data, 'title'=>$title]);
@@ -52,8 +55,8 @@ class AdminController extends Controller
 
     function info_admin(Request $request){
         $data = DB::table('users')->where('id',$request->id )->first();
-        $title = "Info Admin $data->nama";
-        return view('admin.info_admin',['data'=>$data , 'title'=>$title]);
+
+        return view('admin.info_admin',['data'=>$data]);
     }
 
     function hapus_admin(Request $request){

@@ -8,7 +8,7 @@
                 <h2>Tambah Data Admin</h2>
             </div>
             <div class="card-body">
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="/admin/edit_admin/{{ $data->id }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="inputNama">Nama</label>
