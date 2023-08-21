@@ -29,5 +29,11 @@ Route::post('/admin/tambah_admin', [AdminController::class, 'tambah_admin'])->na
 Route::get('/admin/edit_data_admin/{id}',[AdminController::class, 'form_edit_admin'])->name('edit_data_admin');
 Route::post('/admin/edit_admin/{id}',[AdminController::class, 'edit_admin'])->name('edit_admin');
 
+//Info Admin
+Route::get('/admin/info_admin/{id}',[AdminController::class, 'info_admin'])->name('info_admin');
+
+//Hapus Admin
+Route::get('/admin/hapus_admin/{id}',[AdminController::class, 'hapus_admin'])->name('hapus_admin');
+
 // test authentication
 Route::post('/login', [LoginController::class, 'authenticate']);
