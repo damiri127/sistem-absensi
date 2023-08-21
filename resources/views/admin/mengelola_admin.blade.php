@@ -28,13 +28,13 @@
                         <tbody>
                             @foreach ($data as $item)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->id }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>
                                         <a href="#" class="btn btn-sm btn-info"><i class="fa fa-info-circle"></i> <span>Info</span></a>
                                         <a href="/admin/edit_data_admin/{{$loop->iteration}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>
-                                        <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> <span>Hapus</span></a>
+                                        <a href="#" class="btn btn-sm btn-danger delete-admin" data-id="{{ $item->id }}"><i class="fas fa-trash-alt"></i> <span>Hapus</span></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -47,4 +47,17 @@ class AdminController extends Controller
 
         return view('admin.edit_data_admin',['data'=>$data]);
     }
+
+    function edit_admin(Request $request, $id){
+        $data = User::find($id);
+        $data->nama = $request->nama;
+        $data->email = $request->email;
+        $data->image = $request->image;
+        $data->tanggal_lahir = $request->tanggal_lahir;
+        $data->tempat_lahir = $request->tempat_lahir;
+        $data->password = bcrypt($request->password);
+        $data->save();
+
+        return redirect('admin/mengelola_admin')->withSuccess('Data berhasil diubah');
+    }
 }

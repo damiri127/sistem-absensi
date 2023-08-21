@@ -27,6 +27,7 @@ Route::post('/admin/tambah_admin', [AdminController::class, 'tambah_admin'])->na
 
 //EDIT DATA ADMIN
 Route::get('/admin/edit_data_admin/{id}',[AdminController::class, 'form_edit_admin'])->name('edit_data_admin');
+Route::post('/admin/edit_admin/{id}',[AdminController::class, 'edit_admin'])->name('edit_admin');
 
 // test authentication
 Route::post('/login', [LoginController::class, 'authenticate']);
