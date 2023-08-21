@@ -9,17 +9,19 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     public function index (){
-        return (view('admin.dashboard'));
+        $title = "Beranda";
+        return (view('admin.dashboard', ['title' => $title]));
     }
 
     public function mengelola_admin (){
         $data = DB::table('users')->where('level', 'admin')->get();
-        $title = "Admin | Mengelola data Admin";
+        $title = "Mengelola data Admin";
         return (view('admin.mengelola_admin', ['data'=> $data, 'title' => $title]));
     }
 
     public function form_tambah_admin(){
-        return (view('admin.tambah_data_admin'));
+        $title = "Tambah Admin";
+        return (view('admin.tambah_data_admin', ['title' => $title]));
     }
 
     public function tambah_admin(Request $request){
@@ -29,7 +31,7 @@ class AdminController extends Controller
         $data->image = $request->image;
         $data->tanggal_lahir = $request->tanggal_lahir;
         $data->tempat_lahir = $request->tempat_lahir;
-        $data->level = 'admin';
+        $data->level = 'Admin';
         $data->password = bcrypt($request->password);
 
         if($request->hasFile('image')){
@@ -44,14 +46,14 @@ class AdminController extends Controller
     
     function form_edit_admin(Request $request){
         $data = DB::table('users')->where('id',$request->id )->first();
-
-        return view('admin.edit_data_admin',['data'=>$data]);
+        $title = "Edit Data Admin $data->nama";
+        return view('admin.edit_data_admin',['data'=>$data, 'title'=>$title]);
     }
 
     function info_admin(Request $request){
         $data = DB::table('users')->where('id',$request->id )->first();
-
-        return view('admin.info_admin',['data'=>$data]);
+        $title = "Info Admin $data->nama";
+        return view('admin.info_admin',['data'=>$data , 'title'=>$title]);
     }
 
     function hapus_admin(Request $request){

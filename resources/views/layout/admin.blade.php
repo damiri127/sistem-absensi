@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<!-- Title pada setiap halaman akan berbeda  -->
-	<title>Admin | Halaman Dashboard</title> 
+	<title>Admin | {{$title}}</title> 
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="{{asset("layout_asset/examples/assets/img/logo.jpg")}}" type="image/x-icon"/>
 
@@ -32,7 +32,7 @@
 			<!-- Logo Header -->
 			<div class="logo-header" data-background-color="blue">
 				
-				<a href="index.html" class="logo">
+				<a href="/admin" class="logo">
 					<img src="{{asset("layout_asset/examples/assets/img/White-2.ico")}}" alt="navbar brand" class="navbar-brand">
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,7 +115,7 @@
 						</div>
 					</div>
 					<ul class="nav nav-primary">
-						<li class="nav-item active">
+						<li class="nav-item {{(request()->is('admin'))? 'active' : ''}}">
 							<a href="/admin"  aria-expanded="false">
 								<i class="fas fa-home"></i>
 								<p>Beranda</p>
@@ -128,7 +128,7 @@
 							</span>
 							<h4 class="text-section">Data Master</h4>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item {{(request()->is('admin/mengelola_admin'))? 'active' : ''}}">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-users"></i>
 								<p>Pengguna</p>
@@ -138,21 +138,21 @@
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="/admin/mengelola_admin">
-											<span class="sub-item">Admin</span>
+											<span class="sub-item {{(request()->is('admin'))? 'active' : ''}}">Admin</span>
 										</a>
 									</li>
 									<li>
-										<a href="components/buttons.html">
+										<a href="#">
 											<span class="sub-item">Kepala Sekolah</span>
 										</a>
 									</li>
 									<li>
-										<a href="components/gridsystem.html">
+										<a href="#">
 											<span class="sub-item">Tata Usaha</span>
 										</a>
 									</li>
 									<li>
-										<a href="components/panels.html">
+										<a href="#">
 											<span class="sub-item">Guru</span>
 										</a>
 									</li>
