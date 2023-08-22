@@ -128,7 +128,7 @@
 							</span>
 							<h4 class="text-section">Data Master</h4>
 						</li>
-						<li class="nav-item {{(request()->is('admin/mengelola_admin'))? 'active' : ''}}">
+						<li class="nav-item {{(request()->is('admin/mengelola_admin')||('admin/mengelola_tatausaha'))? 'active' : ''}}">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-users"></i>
 								<p>Pengguna</p>
@@ -138,7 +138,7 @@
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="/admin/mengelola_admin">
-											<span class="sub-item {{(request()->is('admin'))? 'active' : ''}}">Admin</span>
+											<span class="sub-item">Admin</span>
 										</a>
 									</li>
 									<li>
@@ -147,7 +147,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="/admin/mengelola_tatausaha">
 											<span class="sub-item">Tata Usaha</span>
 										</a>
 									</li>

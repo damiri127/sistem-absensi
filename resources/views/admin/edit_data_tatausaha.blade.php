@@ -1,30 +1,30 @@
 @extends('layout.admin')
 @section('content')
     <div class="page-inner">
-        <a href="/admin/mengelola_admin" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
+        <a href="/admin/mengelola_tatausaha" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
         {{-- <h4 class="page-title" class="mb-3">Tambah Data Admin</h4> --}}
         <div class="card">
             <div class="card-header">
-                <h2>Tambah Data Admin</h2>
+                <h2>Tambah Data Tata Usaha</h2>
             </div>
             <div class="card-body">
-                <form action="/admin/edit_admin/{{ $data->id }}" method="POST" enctype="multipart/form-data">
+                <form action="/admin/edit_tatausaha/{{ $data->id }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="inputNama">Nama</label>
-                        <input id="inputNama" type="text" name="nama" class="form-control" placeholder="Masukan Nama Admin" value="{{$data->nama}}">
+                        <input id="inputNama" type="text" name="nama" class="form-control" placeholder="Masukan Nama Tata Usaha" value="{{$data->nama}}">
                     </div>
                     <div class="form-group">
                         <label for="inputTanggalLahir">Tanggal Lahir</label>
-                        <input id="inputTanggalLahir" type="date" name="tanggal_lahir" class="form-control" placeholder="Masukan Tanggal Lahir Admin" value="{{$data->tanggal_lahir}}">
+                        <input id="inputTanggalLahir" type="date" name="tanggal_lahir" class="form-control" placeholder="Masukan Tanggal Lahir Tata Usaha" value="{{$data->tanggal_lahir}}">
                     </div>
                     <div class="form-group">
                         <label for="inputTempatLahir">Tempat Lahir</label>
-                        <input id="inputTempatLahir" type="text" name="tempat_lahir" class="form-control" placeholder="Masukan Tempat Lahir Admin" value="{{$data->tempat_lahir}}">
+                        <input id="inputTempatLahir" type="text" name="tempat_lahir" class="form-control" placeholder="Masukan Tempat Lahir Tata Usaha" value="{{$data->tempat_lahir}}">
                     </div>
                     <div class="form-group">
                         <label for="inputEmail">Email</label>
-                        <input id="inputEmail" type="email" name="email" class="form-control" placeholder="Masukan Alamat Email Admin" value="{{$data->email}}" required>
+                        <input id="inputEmail" type="email" name="email" class="form-control" placeholder="Masukan Alamat Email Tata Usaha" value="{{$data->email}}" required>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword">Password</label>
@@ -37,7 +37,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Perbarui</button>
-                        <a href="/admin/mengelola_admin" class="btn btn-danger">Kembali</a>
+                        <a href="/admin/mengelola_tatausaha" class="btn btn-danger">Kembali</a>
                     </div>
                 </form>
             </div>

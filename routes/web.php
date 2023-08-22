@@ -35,5 +35,16 @@ Route::get('/admin/info_admin/{id}',[AdminController::class, 'info_admin'])->nam
 //Hapus Admin
 Route::get('/admin/hapus_admin/{id}',[AdminController::class, 'hapus_admin'])->name('hapus_admin');
 
+//===============================================================
+//MENGELOLA DATA TATA USAHA
+Route::get('/admin/mengelola_tatausaha', [AdminController::class, 'mengelolaTataUsaha'])->name('mengelolaTataUsaha');
+Route::get('/admin/tambah_data_tatausaha',[AdminController::class, 'formTambahDataTataUsaha'])->name('tambahDataTataUsaha');
+Route::post('/admin/tambah_tatausaha', [AdminController::class, 'tambahTataUsaha'])->name('tambahTataUsaha');
+Route::get('/admin/info_tatausaha/{id}',[AdminController::class, 'infoTataUsaha'])->name('infoTataUsaha');
+Route::get('/admin/edit_data_tatausaha/{id}',[AdminController::class, 'formEditTataUsaha'])->name('FormEditTataUsaha');
+Route::post('/admin/edit_tatausaha/{id}',[AdminController::class, 'editTataUsaha'])->name('editTataUsaha');
+Route::get('/admin/hapus_tatausaha/{id}',[AdminController::class, 'hapusTataUsaha'])->name('hapusTataUsaha');
+//MENGELOLA DATA GURU
+
 // test authentication
 Route::post('/login', [LoginController::class, 'authenticate']);

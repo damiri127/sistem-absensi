@@ -54,7 +54,7 @@ class AdminController extends Controller
         $data = User::find($id);
         $data->nama = $request->nama;
         $data->email = $request->email;
-        $data->image = $request->image;
+        // $data->image = $request->image;
         $data->tanggal_lahir = $request->tanggal_lahir;
         $data->tempat_lahir = $request->tempat_lahir;
         $data->password = bcrypt($request->password);
@@ -74,4 +74,65 @@ class AdminController extends Controller
         $data2->delete();
         return redirect()->back();
     }
+
+    //=================================================================================================================//
+    // CRUD TU 
+    //Nama fungsi coba pake camel case kaya Kotlin bang hwhw
+    public function mengelolaTataUsaha (){
+        $data = DB::table('users')->where('level', 'Tata Usaha')->get();
+        $title = "Mengelola data Tata Usaha";
+        return (view('admin.mengelola_tatausaha', ['data'=> $data, 'title' => $title]));
+    }
+    public function formTambahDataTataUsaha(){
+        $title = "Tambah Tata Usaha";
+        return (view('admin.tambah_data_tatausaha', ['title' => $title]));
+    }
+    public function tambahTataUsaha(Request $request){
+        $data = new User();
+        $data->nama = $request->nama;
+        $data->email = $request->email;
+        $data->image = $request->image;
+        $data->tanggal_lahir = $request->tanggal_lahir;
+        $data->tempat_lahir = $request->tempat_lahir;
+        $data->level = 'Tata Usaha';
+        $data->password = bcrypt($request->password);
+
+        if($request->hasFile('image')){
+            $request->file('image')->move('fototatausaha/', $request->file('image')->getClientOriginalName());
+            $data->image = $request->file('image')->getClientOriginalName();
+            $data->save();
+        }else{
+            $data->save();
+        }
+        return redirect('admin/mengelola_tatausaha')->withSuccess('Data berhasil ditambahkan');
+    }
+    function infoTataUsaha(Request $request){
+        $data = DB::table('users')->where('id',$request->id )->first();
+        $title = "Info Tata Usaha $data->nama";
+        return view('admin.info_tatausaha',['data'=>$data, 'title'=>$title]);
+    }
+    function formEditTataUsaha(Request $request){
+        $data = DB::table('users')->where('id', $request->id)->first();
+        $title = "Edit Data Tata Usaha $data->nama";
+        return view('admin.edit_data_tatausaha',['data'=>$data, 'title'=>$title]);
+    }
+    function editTataUsaha(Request $request, $id){
+        $data = User::find($id);
+        $data->nama = $request->nama;
+        $data->email = $request->email;
+        // $data->image = $request->image;
+        $data->tanggal_lahir = $request->tanggal_lahir;
+        $data->tempat_lahir = $request->tempat_lahir;
+        $data->password = bcrypt($request->password);
+        $data->save();
+
+        return redirect('admin/mengelola_tatausaha')->withSuccess('Data berhasil diubah');
+    }
+    function hapusTataUsaha(Request $request){
+        $data2 = User::find($request->id);
+        $data2->delete();
+        return redirect()->back();
+    }
+
+    // CRUD GURU
 }
