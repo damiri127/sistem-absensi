@@ -5,7 +5,7 @@
         {{-- <h4 class="page-title" class="mb-3">Tambah Data Admin</h4> --}}
         <div class="card">
             <div class="card-header">
-                <h2>Tambah Data Admin</h2>
+                <h2>Edit Data Admin</h2>
             </div>
             <div class="card-body">
                 <form action="/admin/edit_admin/{{ $data->id }}" method="POST" enctype="multipart/form-data">
