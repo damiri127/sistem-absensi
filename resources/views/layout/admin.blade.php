@@ -138,7 +138,7 @@
 								<ul class="nav nav-collapse">
 									<li>
 										<a href="/admin/mengelola_admin">
-											<span class="sub-item {{(request()->is('admin'))? 'active' : ''}}">Admin</span>
+											<span class="sub-item">Admin</span>
 										</a>
 									</li>
 									<li>
@@ -147,12 +147,12 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="/admin/mengelola_tatausaha">
 											<span class="sub-item">Tata Usaha</span>
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="/admin/mengelola_guru">
 											<span class="sub-item">Guru</span>
 										</a>
 									</li>
