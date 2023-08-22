@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\KepalaSekolahController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 
@@ -34,6 +35,9 @@ Route::get('/admin/info_admin/{id}',[AdminController::class, 'info_admin'])->nam
 
 //Hapus Admin
 Route::get('/admin/hapus_admin/{id}',[AdminController::class, 'hapus_admin'])->name('hapus_admin');
+
+// Kepala Sekolah
+Route::resource('/kepala-sekolah', KepalaSekolahController::class);
 
 // test authentication
 Route::post('/login', [LoginController::class, 'authenticate']);

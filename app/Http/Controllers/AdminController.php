@@ -58,7 +58,13 @@ class AdminController extends Controller
         $data->tanggal_lahir = $request->tanggal_lahir;
         $data->tempat_lahir = $request->tempat_lahir;
         $data->password = bcrypt($request->password);
-        $data->save();
+        if($request->hasFile('image')){
+            $request->file('image')->move('fotoadmin/', $request->file('image')->getClientOriginalName());
+            $data->image = $request->file('image')->getClientOriginalName();
+            $data->save();
+        }else{
+            $data->save();
+        }
 
         return redirect('admin/mengelola_admin')->withSuccess('Data berhasil diubah');
     }
@@ -72,6 +78,6 @@ class AdminController extends Controller
     function hapus_admin(Request $request){
         $data2 = User::find($request->id);
         $data2->delete();
-        return redirect()->back();
+        return redirect()->back()->withSuccess('Data berhasil dihapus!');
     }
 }

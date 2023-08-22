@@ -128,7 +128,7 @@
 							</span>
 							<h4 class="text-section">Data Master</h4>
 						</li>
-						<li class="nav-item {{(request()->is('admin/mengelola_admin'))? 'active' : ''}}">
+						<li class="nav-item {{(request()->is('*'))? 'active' : ''}}">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-users"></i>
 								<p>Pengguna</p>
@@ -142,8 +142,8 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
-											<span class="sub-item">Kepala Sekolah</span>
+										<a href="/kepala-sekolah">
+											<span class="sub-item {{ (request()->is('kepala-sekolah'))? 'active' : '' }}">Kepala Sekolah</span>
 										</a>
 									</li>
 									<li>
