@@ -47,8 +47,8 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/admin/edit_data_admin/{{$data->id}}" class="btn btn-warning">Edit Data</a>
-                <a href="/admin/mengelola_admin" class="btn btn-danger">Kembali</a>
+                <a href="/master-user/admin/{{$data->id}}/edit" class="btn btn-warning">Edit Data</a>
+                <a href="/master-user/admin" class="btn btn-danger">Kembali</a>
             </div>
         </div>
     </div>

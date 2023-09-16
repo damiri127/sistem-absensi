@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AdminController extends Controller
+class GuruController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $data = DB::table('users')->where('level', 'admin')->get();
-        $title = "Mengelola data Admin";
-        return (view('master-user.admin.mengelola_admin', ['data'=> $data, 'title' => $title]));
+        $data = DB::table('users')->where('level', 'Guru')->get();
+        $title = "Mengelola data Guru";
+        return (view('master-user.guru.mengelola_guru', ['data'=> $data, 'title' => $title]));
     }
 
     /**
@@ -27,8 +27,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        $title = "Tambah Admin";
-        return (view('master-user.admin.create', ['title' => $title]));
+        $title = "Tambah Guru";
+        return (view('master-user.guru.create', ['title' => $title]));
     }
 
     /**
@@ -45,17 +45,17 @@ class AdminController extends Controller
         $data->image = $request->image;
         $data->tanggal_lahir = $request->tanggal_lahir;
         $data->tempat_lahir = $request->tempat_lahir;
-        $data->level = 'Admin';
+        $data->level = 'Guru';
         $data->password = bcrypt($request->password);
 
         if($request->hasFile('image')){
-            $request->file('image')->move('fotoadmin/', $request->file('image')->getClientOriginalName());
+            $request->file('image')->move('fotoguru/', $request->file('image')->getClientOriginalName());
             $data->image = $request->file('image')->getClientOriginalName();
             $data->save();
         }else{
             $data->save();
         }
-        return redirect('/master-user/admin')->withSuccess('Data berhasil ditambahkan');
+        return redirect('/master-user/guru')->withSuccess('Data berhasil ditambahkan');
     }
 
     /**
@@ -67,8 +67,8 @@ class AdminController extends Controller
     public function show(User $user, $id)
     {
         $data = User::find($id);
-        $title = "Info Admin $data->nama";
-        return view('master-user.admin.show', compact('title', 'data'));
+        $title = "Info Guru $data->nama";
+        return view('master-user.guru.show', compact('title', 'data'));
     }
 
     /**
@@ -80,8 +80,8 @@ class AdminController extends Controller
     public function edit(User $user, $id)
     {
         $data = User::find($id);
-        $title = "Edit Data Admin $data->nama";
-        return view('master-user.admin.edit', compact('title', 'data'));
+        $title = "Edit Data Guru $data->nama";
+        return view('master-user.guru.edit', compact('data', 'title'));
     }
 
     /**
@@ -100,15 +100,9 @@ class AdminController extends Controller
         $data->tanggal_lahir = $request->tanggal_lahir;
         $data->tempat_lahir = $request->tempat_lahir;
         $data->password = bcrypt($request->password);
-        if($request->hasFile('image')){
-            $request->file('image')->move('fotoadmin/', $request->file('image')->getClientOriginalName());
-            $data->image = $request->file('image')->getClientOriginalName();
-            $data->save();
-        }else{
-            $data->save();
-        }
+        $data->save();
 
-        return redirect('/master-user/admin')->withSuccess('Data berhasil diubah');
+        return redirect('/master-user/guru')->withSuccess('Data berhasil diubah');
     }
 
     /**
