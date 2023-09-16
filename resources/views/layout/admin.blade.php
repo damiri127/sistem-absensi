@@ -115,8 +115,8 @@
 						</div>
 					</div>
 					<ul class="nav nav-primary">
-						<li class="nav-item {{(request()->is('admin'))? 'active' : ''}}">
-							<a href="/admin"  aria-expanded="false">
+						<li class="nav-item {{(request()->is('dashboard'))? 'active' : ''}}">
+							<a href="/dashboard"  aria-expanded="false">
 								<i class="fas fa-home"></i>
 								<p>Beranda</p>
 								<!-- <span class="caret"></span> -->
@@ -136,11 +136,13 @@
 							</a>
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
+									@if (auth()->user()->level == "Admin")
 									<li>
 										<a href="/master-user/admin">
 											<span class="sub-item">Admin</span>
 										</a>
 									</li>
+									@endif
 									<li>
 										<a href="/master-user/kepala-sekolah">
 											<span class="sub-item">Kepala Sekolah</span>
@@ -167,7 +169,7 @@
 							</span>
 							<h4 class="text-section">Absensi Guru</h4>
 						</li>
-						<li class="nav-item {{(request()->is('/admin/mengelola_kelas'))? 'active' : ''}}">
+						<li class="nav-item {{(request()->is('admin/*'))? 'active' : ''}}">
 							<a data-toggle="collapse" href="#sidebarLayouts">
 								<i class="fas fa-th-list"></i>
 								<p>Data Pendukung</p>

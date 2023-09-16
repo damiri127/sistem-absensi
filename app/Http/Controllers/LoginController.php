@@ -21,13 +21,13 @@ class LoginController extends Controller
             $request->session()->regenerate();
             //redirect berdasarkan level user
             if(auth()->user()->level === "Admin"){
-                return redirect()->intended("master-user");
+                return redirect()->intended("dashboard");
             }else if(auth()->user()->level == "Guru"){
                 return redirect()->intended("guru");
             }else if(auth()->user()->level == "Kepala Sekolah"){
                 return redirect()->intended("kepala-sekolah");
             }else if(auth()->user()->level == "Tata Usaha"){
-                return redirect()->intended("master-user");
+                return redirect()->intended("dashboard");
             }
         }
         return back()->withErrors('Mohon periksa kembali email dan passwordnya!');
