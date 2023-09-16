@@ -1,14 +1,14 @@
 @extends('layout.admin')
 @section('content')
     <div class="page-inner">
-        <a href="/kepala-sekolah" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
+        <a href="/master-user/kepala-sekolah" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
         {{-- <h4 class="page-title" class="mb-3">Tambah Data Admin</h4> --}}
         <div class="card">
             <div class="card-header">
-                <h2>Ubah Data Kepala Sekolah</h2>
+                <h2>Edit Data Kepala Sekolah</h2>
             </div>
             <div class="card-body">
-                <form method="post" action="{{ url('kepala-sekolah/'.$data->id) }}">
+                <form method="post" action="{{ url('/master-user/kepala-sekolah/'.$data->id) }}">
                     @csrf
                     <div class="form-group">
                         <label for="inputNama">Nama</label>
@@ -30,15 +30,10 @@
                         <label for="inputPassword">Password</label>
                         <input id="inputPassword" type="password" name="password" class="form-control" placeholder="Masukan Password" value="{{$data->password}}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="inputImage">Foto Kepala Sekolah</label>
-                        <input type="file" class="form-control-file" id="inputImage" name="image" placeholder="Masukan Foto Kepala Sekolah" value="{{$data->image}}">
-                    </div>
-
                     <div class="card-footer">
                         @method('PUT')
                         <button type="submit" class="btn btn-success">Perbarui</button>
-                        <a href="/kepala-sekolah" class="btn btn-danger">Kembali</a>
+                        <a href="/master-user/kepala-sekolah" class="btn btn-danger">Kembali</a>
                     </div>
                 </form>
             </div>

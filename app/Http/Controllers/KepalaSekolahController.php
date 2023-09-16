@@ -17,7 +17,7 @@ class KepalaSekolahController extends Controller
     {
         $title = 'Kepala Sekolah';
         $data = DB::table('users')->where('level', 'Kepala Sekolah')->get();
-        return view('kepala-sekolah.mengelola_kepala_sekolah', ['data' => $data, 'title' => $title]);
+        return view('master-user.kepala-sekolah.mengelola_kepala_sekolah', ['data' => $data, 'title' => $title]);
     }
 
     /**
@@ -28,7 +28,7 @@ class KepalaSekolahController extends Controller
     public function create()
     {
         $title = 'Tambah data kepala Sekolah';
-        return view('kepala-sekolah.create', ['title' => $title]);
+        return view('master-user.kepala-sekolah.create', ['title' => $title]);
     }
 
     /**
@@ -55,7 +55,7 @@ class KepalaSekolahController extends Controller
         }else{
             $data->save();
         }
-        return redirect('kepala-sekolah')->withSuccess('Data berhasil ditambahkan');
+        return redirect('/master-user/kepala-sekolah')->withSuccess('Data berhasil ditambahkan');
     }
 
     /**
@@ -68,7 +68,7 @@ class KepalaSekolahController extends Controller
     {
         $data = User::find($id);
         $title = "Info Kepala Sekolah $data->nama";
-        return view('kepala-sekolah.show', compact('title', 'data'));
+        return view('master-user.kepala-sekolah.show', compact('title', 'data'));
     }
 
     /**
@@ -81,7 +81,7 @@ class KepalaSekolahController extends Controller
     {
         $title = "Ubah data kepala Sekolah";
         $data = User::find($id);
-        return view('kepala-sekolah.edit', compact('title', 'data'));
+        return view('master-user.kepala-sekolah.edit', compact('title', 'data'));
     }
 
     /**
@@ -100,15 +100,8 @@ class KepalaSekolahController extends Controller
         $data->tanggal_lahir = $request->tanggal_lahir;
         $data->tempat_lahir = $request->tempat_lahir;
         $data->password = bcrypt($request->password);
-        if($request->hasFile('image')){
-            $request->file('image')->move('fotoadmin/', $request->file('image')->getClientOriginalName());
-            $data->image = $request->file('image')->getClientOriginalName();
-            $data->update();
-        }else{
-            $data->update();
-        }
-
-        return redirect('kepala-sekolah')->withSuccess('Data berhasil diubah');
+        $data->update();
+        return redirect('/master-user/kepala-sekolah')->withSuccess('Data berhasil diubah');
     }
 
     /**

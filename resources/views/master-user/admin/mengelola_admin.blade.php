@@ -1,7 +1,7 @@
 @extends('layout.admin')
 @section('content')
     <div class="page-inner">
-        <a href="/admin/tambah_data_admin" class="btn btn-primary"><i class="fas fa-plus"></i>     Tambah</a>
+        <a href="/master-user/admin/create" class="btn btn-primary"><i class="fas fa-plus"></i>     Tambah</a>
         <div class="card mt-3">
             <div class="card-header">
                 <h4 class="card-title">Data Admin</h4>
@@ -32,9 +32,15 @@
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>
-                                        <a href="/admin/info_admin/{{$item->id}}" class="btn btn-sm btn-info"><i class="fa fa-info-circle"></i> <span>Info</span></a>
-                                        <a href="/admin/edit_data_admin/{{$item->id}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>
-                                        <a href="/admin/hapus_admin/{{$item->id}}" class="btn btn-sm btn-danger" id="hapus_data"><i class="fas fa-trash-alt"></i> <span>Hapus</span></a>
+                                        <a href="/master-user/admin/{{$item->id}}" class="btn btn-sm btn-info"><i class="fa fa-info-circle"></i> <span>Info</span></a>
+                                        <a href="/master-user/admin/{{$item->id}}/edit" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>
+                                        <a href="#" class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $item->id }}').submit();"><i class="fas fa-trash-alt"></i>
+                                            Delete
+                                        </a>
+                                        <form id="delete-form-{{ $item->id }}" action="/master-user/admin/{{$item->id}}" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

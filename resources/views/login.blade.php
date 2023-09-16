@@ -69,6 +69,7 @@
 			</div>
 		</div>
 	</section>
+	@include('sweetalert::alert')
 
 	<script src="{{asset("asset_login/login-form-15/js/jquery.min.js")}}"></script>
   <script src="{{asset("asset_login/login-form-15/js/popper.js")}}"></script>

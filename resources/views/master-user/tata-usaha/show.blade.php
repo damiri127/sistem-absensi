@@ -47,8 +47,8 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/admin/edit_data_tatausaha/{{$data->id}}" class="btn btn-warning">Edit Data</a>
-                <a href="/admin/mengelola_tatausaha" class="btn btn-danger">Kembali</a>
+                <a href="/master-user/tata-usaha/{{$data->id}}/edit" class="btn btn-warning">Edit Data</a>
+                <a href="/master-user/tata-usaha" class="btn btn-danger">Kembali</a>
             </div>
         </div>
     </div>
