@@ -167,7 +167,7 @@
 							</span>
 							<h4 class="text-section">Absensi Guru</h4>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item {{(request()->is('/admin/mengelola_kelas'))? 'active' : ''}}">
 							<a data-toggle="collapse" href="#sidebarLayouts">
 								<i class="fas fa-th-list"></i>
 								<p>Data Pendukung</p>
@@ -176,17 +176,17 @@
 							<div class="collapse" id="sidebarLayouts">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="#">
+										<a href="/admin/mengelola_programstudi">
 											<span class="sub-item">Program Studi</span>
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="/admin/mengelola_kelas">
 											<span class="sub-item">Kelas</span>
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="/admin/mengelola_matapelajaran">
 											<span class="sub-item">Mata Pelajaran</span>
 										</a>
 									</li>
