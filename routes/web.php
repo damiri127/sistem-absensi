@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DataPendukungController;
 use App\Http\Controllers\KepalaSekolahController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -56,6 +57,35 @@ Route::get('/admin/info_guru/{id}',[AdminController::class, 'infoGuru'])->name('
 Route::get('/admin/edit_data_guru/{id}',[AdminController::class, 'formEditGuru'])->name('FormEditGuru');
 Route::post('/admin/edit_guru/{id}',[AdminController::class, 'editGuru'])->name('editGuru');
 Route::get('/admin/hapus_guru/{id}',[AdminController::class, 'hapusGuru'])->name('hapusGuru');
+
+//================================================================//
+//DATA PENDUKUNG
+    //Mengelola Program Studi
+    Route::get('/admin/mengelola_programstudi', [DataPendukungController::class, 'mengelolaProgramStudi'])->name('mengelolaProgramStudi');
+    Route::get('/admin/tambah_data_programstudi', [DataPendukungController::class, 'tambah_prodi'])->name('tambah_prodi');
+    Route::post('/admin/post_prodi', [DataPendukungController::class, 'postTambahProdi'])->name('post_prodi');
+    Route::get('/admin/edit_data_programstudi/{id_prodi}',[DataPendukungController::class, 'formEditProdi'])->name('FormEditProdi');
+    Route::post('/admin/edit_programstudi/{id_prodi}',[DataPendukungController::class, 'postEditProdi'])->name('postEditProdi');
+    Route::get('/admin/hapus_programstudi/{id_prodi}',[DataPendukungController::class, 'deleteProdi'])->name('deleteProdi');
+    Route::get('/admin/info_programstudi/{id_prodi}',[DataPendukungController::class, 'infoProdi'])->name('infoProdi');
+    
+
+    //Mengelola data Kelas siswa
+    Route::get('/admin/mengelola_kelas', [DataPendukungController::class, 'mengelolaDataKelas'])->name('mengelolaDataKelas');
+    Route::get('/admin/tambah_data_kelas', [DataPendukungController::class, 'tambah_kelas'])->name('tambah_kelas');
+    Route::post('/admin/post_kelas', [DataPendukungController::class, 'postTambahKelas'])->name('post_kelas');
+    Route::get('/admin/edit_data_kelas/{id_kelas}',[DataPendukungController::class, 'formEditKelas'])->name('FormEditKelas');
+    Route::post('/admin/edit_kelas/{id_kelas}',[DataPendukungController::class, 'postEditKelas'])->name('postEditKelas');
+    Route::get('/admin/hapus_kelas/{id_kelas}',[DataPendukungController::class, 'deleteKelas'])->name('deleteKelas');
+
+    //Mengelola data Mata Pelajaran
+    Route::get('/admin/mengelola_matapelajaran', [DataPendukungController::class, 'mengelolaDataMataPelajaran'])->name('mengelolaDataMataPelajaran');
+    Route::get('/admin/tambah_data_matapelajaran', [DataPendukungController::class, 'tambah_matapelajaran'])->name('tambah_mapel');
+    Route::post('/admin/post_mapel', [DataPendukungController::class, 'postTambahMapel'])->name('post_mapel');
+    
+
+    
+
 
 
 
