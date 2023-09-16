@@ -33,9 +33,34 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 
 // Cek Level Authentication
+Route::group(['middleware' => ['auth', 'ceklevel:Admin']], function () {
+    // dashboard admin dan TU routes
+    Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+    // MENGELOLA ADMIN
+    Route::resource('/master-user/admin', AdminController::class);
+
+    //===============================================================
+    // Kepala Sekolah
+    Route::resource('/master-user/kepala-sekolah', KepalaSekolahController::class);
+
+    //===============================================================
+    //MENGELOLA DATA TATA USAHA
+    Route::resource('/master-user/tata-usaha', TataUsahaController::class);
+
+    //MENGELOLA DATA GURU
+    Route::resource('/master-user/guru', GuruController::class);
+
+});
+
 Route::group(['middleware' => ['auth', 'ceklevel:Admin,Tata Usaha']], function () {
     // dashboard admin dan TU routes
-    Route::get('/master-user',[DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+    Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+     // Kepala Sekolah
+    Route::resource('/master-user/kepala-sekolah', KepalaSekolahController::class);
+    //MENGELOLA DATA TATA USAHA
+    Route::resource('/master-user/tata-usaha', TataUsahaController::class);
+    //MENGELOLA DATA GURU
+    Route::resource('/master-user/guru', GuruController::class);
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:Kepala Sekolah']], function () {
@@ -55,19 +80,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:Tu']], function () {
 
 
 //================================================================
-// MENGELOLA ADMIN
-Route::resource('/master-user/admin', AdminController::class);
-
-//===============================================================
-// Kepala Sekolah
-Route::resource('/master-user/kepala-sekolah', KepalaSekolahController::class);
-
-//===============================================================
-//MENGELOLA DATA TATA USAHA
-Route::resource('/master-user/tata-usaha', TataUsahaController::class);
-
-//MENGELOLA DATA GURU
-Route::resource('/master-user/guru', GuruController::class);
 
 
 //================================================================//
