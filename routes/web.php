@@ -1,10 +1,14 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DataPendukungController;
 use App\Http\Controllers\KepalaSekolahController;
+use App\Http\Controllers\TataUsahaController;
+use App\Http\Controllers\GuruController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,43 +24,51 @@ use App\Http\Controllers\LoginController;
 Route::get('/', function () {
     return view('login');
 });
-Route::get('/admin/mengelola_admin', [AdminController::class, 'mengelola_admin'])->name('mengelola_admmin');
-Route::get('/admin',[AdminController::class, 'index'])->name('admin_dashboard');
-Route::get('/admin/tambah_data_admin',[AdminController::class, 'form_tambah_admin'])->name('tambah_data_admin');
 
-//POST DATA ADMIN KETIKA DITAMBAHKAN
-Route::post('/admin/tambah_admin', [AdminController::class, 'tambah_admin'])->name('tambah_admi');
+// logout action
+Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
 
-//EDIT DATA ADMIN
-Route::get('/admin/edit_data_admin/{id}',[AdminController::class, 'form_edit_admin'])->name('edit_data_admin');
-Route::post('/admin/edit_admin/{id}',[AdminController::class, 'edit_admin'])->name('edit_admin');
+// test authentication
+Route::post('/login', [LoginController::class, 'authenticate']);
 
-//Info Admin
-Route::get('/admin/info_admin/{id}',[AdminController::class, 'info_admin'])->name('info_admin');
 
-//Hapus Admin
-Route::get('/admin/hapus_admin/{id}',[AdminController::class, 'hapus_admin'])->name('hapus_admin');
+// Cek Level Authentication
+Route::group(['middleware' => ['auth', 'ceklevel:Admin,Tata Usaha']], function () {
+    // dashboard admin dan TU routes
+    Route::get('/master-user',[DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
+});
 
+Route::group(['middleware' => ['auth', 'ceklevel:Kepala Sekolah']], function () {
+    // dashboard kepsek routes
+    
+});
+
+Route::group(['middleware' => ['auth', 'ceklevel:Guru']], function () {
+    // dashboard guru routes
+    
+});
+
+Route::group(['middleware' => ['auth', 'ceklevel:Tu']], function () {
+    // dashboard tu routes
+    
+});
+
+
+//================================================================
+// MENGELOLA ADMIN
+Route::resource('/master-user/admin', AdminController::class);
+
+//===============================================================
 // Kepala Sekolah
-Route::resource('/kepala-sekolah', KepalaSekolahController::class);
+Route::resource('/master-user/kepala-sekolah', KepalaSekolahController::class);
+
 //===============================================================
 //MENGELOLA DATA TATA USAHA
-Route::get('/admin/mengelola_tatausaha', [AdminController::class, 'mengelolaTataUsaha'])->name('mengelolaTataUsaha');
-Route::get('/admin/tambah_data_tatausaha',[AdminController::class, 'formTambahDataTataUsaha'])->name('tambahDataTataUsaha');
-Route::post('/admin/tambah_tatausaha', [AdminController::class, 'tambahTataUsaha'])->name('tambahTataUsaha');
-Route::get('/admin/info_tatausaha/{id}',[AdminController::class, 'infoTataUsaha'])->name('infoTataUsaha');
-Route::get('/admin/edit_data_tatausaha/{id}',[AdminController::class, 'formEditTataUsaha'])->name('FormEditTataUsaha');
-Route::post('/admin/edit_tatausaha/{id}',[AdminController::class, 'editTataUsaha'])->name('editTataUsaha');
-Route::get('/admin/hapus_tatausaha/{id}',[AdminController::class, 'hapusTataUsaha'])->name('hapusTataUsaha');
+Route::resource('/master-user/tata-usaha', TataUsahaController::class);
 
 //MENGELOLA DATA GURU
-Route::get('/admin/mengelola_guru', [AdminController::class, 'mengelolaGuru'])->name('mengelolaGuru');
-Route::get('/admin/tambah_data_guru',[AdminController::class, 'formTambahDataGuru'])->name('tambahDataGuru');
-Route::post('/admin/tambah_guru', [AdminController::class, 'tambahGuru'])->name('tambahGuru');
-Route::get('/admin/info_guru/{id}',[AdminController::class, 'infoGuru'])->name('infoGuru');
-Route::get('/admin/edit_data_guru/{id}',[AdminController::class, 'formEditGuru'])->name('FormEditGuru');
-Route::post('/admin/edit_guru/{id}',[AdminController::class, 'editGuru'])->name('editGuru');
-Route::get('/admin/hapus_guru/{id}',[AdminController::class, 'hapusGuru'])->name('hapusGuru');
+Route::resource('/master-user/guru', GuruController::class);
+
 
 //================================================================//
 //DATA PENDUKUNG
@@ -84,10 +96,6 @@ Route::get('/admin/hapus_guru/{id}',[AdminController::class, 'hapusGuru'])->name
     Route::post('/admin/post_mapel', [DataPendukungController::class, 'postTambahMapel'])->name('post_mapel');
     
 
-    
-
-
-
-
 // test authentication
 Route::post('/login', [LoginController::class, 'authenticate']);
+

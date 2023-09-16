@@ -21,15 +21,22 @@ class LoginController extends Controller
             $request->session()->regenerate();
             //redirect berdasarkan level user
             if(auth()->user()->level === "Admin"){
-                return redirect()->intended("admin");
+                return redirect()->intended("master-user");
             }else if(auth()->user()->level == "Guru"){
                 return redirect()->intended("guru");
             }else if(auth()->user()->level == "Kepala Sekolah"){
                 return redirect()->intended("kepala-sekolah");
             }else if(auth()->user()->level == "Tata Usaha"){
-                return redirect()->intended("tata-usaha");
+                return redirect()->intended("master-user");
             }
         }
-        return back()->withErrors('Gagal Login', 'Mohon periksa kembali email dan passwordnya!');
+        return back()->withErrors('Mohon periksa kembali email dan passwordnya!');
+    }
+
+    public function logoutAction(){
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect('/');
     }
 }

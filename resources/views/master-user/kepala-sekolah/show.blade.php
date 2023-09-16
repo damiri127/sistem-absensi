@@ -3,7 +3,7 @@
     <div class="page-inner">
         <div class="card ">
             <div class="card-header">
-                <h2>Informasi Data Guru</h2>
+                <h2>Informasi Data Kepala Sekolah</h2>
             </div>
             <div class="card-body">
                 <div class="page-inner">
@@ -11,7 +11,7 @@
                             <div class="col">
                                 <center>
                                     <div>
-                                        <img src="{{asset('fotoguru/'.$data->image)}}" alt="" class="img-thumbnail w-25">
+                                        <img src="{{asset('fotoadmin/'.$data->image)}}" alt="" class="img-thumbnail w-25">
                                     </div>
                                 </center>
                             </div>
@@ -47,8 +47,8 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/admin/edit_data_guru/{{$data->id}}" class="btn btn-warning">Edit Data</a>
-                <a href="/admin/mengelola_guru" class="btn btn-danger">Kembali</a>
+                <a href="/master-user/kepala-sekolah/{{$data->id}}/edit" class="btn btn-warning">Edit Data</a>
+                <a href="/master-user/kepala-sekolah" class="btn btn-danger">Kembali</a>
             </div>
         </div>
     </div>

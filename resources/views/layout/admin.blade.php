@@ -128,7 +128,7 @@
 							</span>
 							<h4 class="text-section">Data Master</h4>
 						</li>
-						<li class="nav-item {{(request()->is('*'))? 'active' : ''}}">
+						<li class="nav-item {{(request()->is('master-user/*'))? 'active' : ''}}">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-users"></i>
 								<p>Pengguna</p>
@@ -137,22 +137,22 @@
 							<div class="collapse" id="base">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="/admin/mengelola_admin">
+										<a href="/master-user/admin">
 											<span class="sub-item">Admin</span>
 										</a>
 									</li>
 									<li>
-										<a href="/kepala-sekolah">
-											<span class="sub-item {{ (request()->is('kepala-sekolah'))? 'active' : '' }}">Kepala Sekolah</span>
+										<a href="/master-user/kepala-sekolah">
+											<span class="sub-item">Kepala Sekolah</span>
 										</a>
 									</li>
 									<li>
-										<a href="/admin/mengelola_tatausaha">
+										<a href="/master-user/tata-usaha">
 											<span class="sub-item">Tata Usaha</span>
 										</a>
 									</li>
 									<li>
-										<a href="/admin/mengelola_guru">
+										<a href="/master-user/guru">
 											<span class="sub-item">Guru</span>
 										</a>
 									</li>
@@ -210,7 +210,7 @@
 							</a>
 						</li>
 						<li class="mx-4 mt-2">
-							<a href="#" class="btn btn-default btn-block"><span class="btn-label mr-2"> <i class="fas fa-power-off"></i> </span>Keluar</a> 
+							<a href="/logout" class="btn btn-default btn-block"><span class="btn-label mr-2"> <i class="fas fa-power-off"></i> </span>Keluar</a> 
 						</li>
 					</ul>
 				</div>

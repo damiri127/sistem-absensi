@@ -1,14 +1,14 @@
 @extends('layout.admin')
 @section('content')
     <div class="page-inner">
-        <a href="/admin/mengelola_guru" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
+        <a href="/master-user/guru" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
         {{-- <h4 class="page-title" class="mb-3">Tambah Data Admin</h4> --}}
         <div class="card">
             <div class="card-header">
                 <h2>Edit Data Guru</h2>
             </div>
             <div class="card-body">
-                <form action="/admin/edit_guru/{{ $data->id }}" method="POST" enctype="multipart/form-data">
+                <form method="post" action="{{ url('/master-user/guru/'.$data->id) }}">
                     @csrf
                     <div class="form-group">
                         <label for="inputNama">Nama</label>
@@ -36,8 +36,9 @@
                     </div> --}}
 
                     <div class="card-footer">
+                        @method('PUT')
                         <button type="submit" class="btn btn-success">Perbarui</button>
-                        <a href="/admin/mengelola_guru" class="btn btn-danger">Kembali</a>
+                        <a href="/master-user/guru" class="btn btn-danger">Kembali</a>
                     </div>
                 </form>
             </div>
