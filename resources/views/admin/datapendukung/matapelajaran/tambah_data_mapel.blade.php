@@ -10,7 +10,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="inputNama">Nama</label>
-                        <input id="inputNama" type="text" name="nama_mapel" class="form-control" placeholder="Masukan Nama Mata Pelajaran">
+                        <input id="inputNama" type="text" name="nama_mapel" class="form-control" required placeholder="Masukan Nama Mata Pelajaran">
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Tambahkan</button>

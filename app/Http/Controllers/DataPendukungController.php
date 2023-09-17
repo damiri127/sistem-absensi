@@ -130,26 +130,31 @@ class DataPendukungController extends Controller
     }
 
     function postTambahMapel(Request $request){
-        $data = $request -> nama_prodi;
         DB::table('matapelajaran')->insert([
             'nama_mapel'=> $request->nama_mapel
         ]);
         return redirect('admin/mengelola_matapelajaran')->withSuccess('Data berhasil ditambahkan');
     }
 
+    function formEditMapel(Request $request){
+        $data = DB::table('matapelajaran')->where('id_mapel', $request->id_mapel)->first();
+        $title = "Edit Data Mata Pelajaran";
+        return view('admin.datapendukung.matapelajaran.edit_data_mapel', ['data'=>$data, 'title'=>$title]);
+    }
 
+    function postEditMapel(Request $request){
+        DB::table('matapelajaran')
+            ->where('id_mapel', $request->id_mapel)
+            ->update([
+                'nama_mapel' => $request -> nama_mapel
+            ]);
+        return redirect('admin/mengelola_matapelajaran')->withSuccess('Data berhasil diubah');
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
+    function deleteMapel(Request $request){
+        DB::table('matapelajaran')->where('id_mapel', $request->id_mapel)->delete();
+        return redirect('admin/mengelola_matapelajaran')->withSuccess('Data berhasil dihapus');
+    }
+    
     
 }

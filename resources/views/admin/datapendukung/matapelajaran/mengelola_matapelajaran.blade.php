@@ -30,7 +30,7 @@
                                     <td>{{ $item->nama_mapel }}</td>
                                     <td>
                                         <a href="/admin/edit_data_matapelajaran/{{$item->id_mapel}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>
-                                        <a href="/admin/hapus_programstudi/{{$item->id_mapel}}" class="btn btn-sm btn-danger" id="hapus_data"><i class="fas fa-trash-alt"></i> <span>Hapus</span></a>
+                                        <a href="/admin/hapus_matapelajaran/{{$item->id_mapel}}" class="btn btn-sm btn-danger" id="hapus_data"><i class="fas fa-trash-alt"></i> <span>Hapus</span></a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -106,6 +106,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:Tu']], function () {
     Route::get('/admin/mengelola_matapelajaran', [DataPendukungController::class, 'mengelolaDataMataPelajaran'])->name('mengelolaDataMataPelajaran');
     Route::get('/admin/tambah_data_matapelajaran', [DataPendukungController::class, 'tambah_matapelajaran'])->name('tambah_mapel');
     Route::post('/admin/post_mapel', [DataPendukungController::class, 'postTambahMapel'])->name('post_mapel');
+    Route::get('/admin/edit_data_matapelajaran/{id_mapel}',[DataPendukungController::class, 'formEditMapel'])->name('FormEditMapel');
+    Route::post('/admin/edit_matapelajaran/{id_mapel}',[DataPendukungController::class, 'postEditMapel'])->name('postEditMapel');
+    Route::get('/admin/hapus_matapelajaran/{id_mapel}',[DataPendukungController::class, 'deleteMapel'])->name('deleteMapel');
     
 
 // test authentication
