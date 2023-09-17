@@ -56,14 +56,20 @@
 						<li class="nav-item dropdown hidden-caret">
 							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
 								<div class="avatar-sm">
-									<img src="{{asset("layout_asset/examples/assets/img/profile.jpg")}}" alt="..." class="avatar-img rounded-circle">
+									<img src="{{asset("fototatausaha/".auth()->user()->image)}}" alt="..." class="avatar-img rounded-circle">
 								</div>
 							</a>
 							<ul class="dropdown-menu dropdown-user animated fadeIn">
 								<div class="dropdown-user-scroll scrollbar-outer">
 									<li>
 										<div class="user-box">
-											<div class="avatar-lg"><img src="{{asset("layout_asset/examples/assets/img/profile.jpg")}}" alt="image profile" class="avatar-img rounded"></div>
+											<div class="avatar-lg">
+												@if (auth()->user()->level == 'Admin')
+													<img src="{{asset("fotoadmin/".auth()->user()->image)}}" alt="..." class="avatar-img rounded">
+												@else
+													<img src="{{asset("fototatausaha/".auth()->user()->image)}}" alt="image profile" class="avatar-img rounded">
+												@endif
+											</div>
 											<div class="u-text">
 												<h4>Hizrian</h4>
 												<p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
@@ -74,7 +80,7 @@
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="#">Pengaturan Akun</a>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Keluar</a>
+										<a class="dropdown-item" href="/logout">Keluar</a>
 									</li>
 								</div>
 							</ul>
@@ -91,13 +97,17 @@
 				<div class="sidebar-content">
 					<div class="user">
 						<div class="avatar-sm float-left mr-2">
-							<img src="{{asset("layout_asset/examples/assets/img/profile.jpg")}}" alt="..." class="avatar-img rounded-circle">
+							@if (auth()->user()->level == 'Admin')
+								<img src="{{asset("fotoadmin/".auth()->user()->image)}}" alt="..." class="avatar-img rounded-circle">
+							@else
+								<img src="{{asset("fototatausaha/".auth()->user()->image)}}" alt="..." class="avatar-img rounded-circle">
+							@endif
 						</div>
 						<div class="info">
 							<a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									Nama Admin
-									<span class="user-level">Admin</span>
+									{{auth()->user()->nama}}
+									<span class="user-level">{{auth()->user()->level}}</span>
 									<span class="caret"></span>
 								</span>
 							</a>
