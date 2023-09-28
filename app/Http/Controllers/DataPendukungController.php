@@ -12,6 +12,8 @@ class DataPendukungController extends Controller
         Mencoba 
     */
 
+    //============Mengelola data Program Studi=========================
+
     function mengelolaProgramStudi(){
         $data = DB::table('programstudi')->get();
         $title = "Mengelola Program Studi";
@@ -155,6 +157,79 @@ class DataPendukungController extends Controller
         DB::table('matapelajaran')->where('id_mapel', $request->id_mapel)->delete();
         return redirect('admin/mengelola_matapelajaran')->withSuccess('Data berhasil dihapus');
     }
-    
-    
+
+    //====================Mengelola data Jadwal Pembelajaran===============================
+
+    function mengelolaDataJadwal(){
+        $data = DB::table('jadwal')
+                ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+                ->get();
+        $title = "Mengelola Data Kelas";
+        return view('admin.datapendukung.jadwalpembelajaran.mengelola_jadwal', ['title' => $title, 'data' => $data]);
+    }
+
+    function tambah_jadwal(){
+        $data_mapel = DB::table('matapelajaran')->get();
+        $data_kelas = DB::table('kelas')
+                    ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+                    ->get();
+        $data_guru = DB::table('users')->where('level', 'Guru')->get();
+        $title = "Tambah Kelas";
+        return view('admin.datapendukung.jadwalpembelajaran.tambah_data_jadwal', ['title'=>$title, 'data_mapel'=>$data_mapel, 'data_guru'=>$data_guru, 'data_kelas'=>$data_kelas]);
+    }
+
+    function postTambahJadwal(Request $request){
+
+        //Konversi string -> menit
+        $jam_mulai = strtotime($request->jam_mulai);
+        $jam_selesai = strtotime($request->jam_selesai);
+        
+        //Get selisih + konversi to menit
+        $selisih = date($jam_selesai - $jam_mulai) / 60 ; 
+
+        //get menit actual 
+        $menit_jp = $selisih;
+
+        //inisialisasi satu_jp = 40 
+        $satu_jp = 40;
+        $jam_jadwal = 1 ; //untuk setiap 40 menit = 1 jam mapel
+        $total_jp = 0 ; //inisiasi awal $total_jp = 0
+        while ($menit_jp>=40){  
+            if ($menit_jp == $satu_jp){
+                $total_jp = $jam_jadwal ;
+                $menit_jp = 0 ;  
+            } else {
+                $jam_jadwal = $jam_jadwal + 1;
+                $satu_jp = $satu_jp + 40 ;
+                
+                if ($satu_jp>200){
+                    $menit_jp = 0;
+                    $total_jp = 0;
+                }
+            }
+        }
+        if ($total_jp == 0) {
+            return redirect('admin/mengelola_jadwalpelajaran')->withSuccess('Data gagal ditambahkan!');
+        } else {
+            DB::table('jadwal')->insert([
+                'hari' => $request->hari,
+                'jam_mulai' => $request->jam_mulai,
+                'jam_selesai' => $request->jam_selesai,
+                'id_mapel' => $request->id_mapel,
+                'id_kelas' => $request->id_kelas,
+                'id_guru' => $request->id_guru,
+                'total_jp' => $total_jp
+            ]);
+            return redirect('admin/mengelola_jadwalpelajaran')->withSuccess('Data berhasil ditambahkan');   
+        }
+    }
+
+
+    function formEditJadwal(Request $request){
+        $data = DB::table('jadwal')->where('id_jadwal', $request->id_jadwal)->first();
+        $title = "Edit Data Jadwal Pembelajaran";
+        return view('admin.datapendukung.jadwalpembelajaran.edit_data_jadwal', ['data'=>$data, 'title'=>$title]);
+    }
+
+
 }

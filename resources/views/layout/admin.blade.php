@@ -203,7 +203,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="/admin/mengelola_jadwalpelajaran">
 											<span class="sub-item">Jadwal Pembelajaran</span>
 										</a>
 									</li>
