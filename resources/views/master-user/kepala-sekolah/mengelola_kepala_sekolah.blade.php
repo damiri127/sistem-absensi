@@ -28,8 +28,8 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr>
-                            @foreach ($data as $item)
+                        @foreach ($data as $item)
+                            <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->nama }}</td>
                                 <td>{{ $item->email }}</td>
@@ -46,8 +46,8 @@
                                         @method('DELETE')
                                     </form>
                                 </td>
-                            @endforeach
-                        </tr>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
