@@ -265,12 +265,44 @@ class DataPendukungController extends Controller
         }
     }
 
-    
     function deleteJadwal(Request $request){
         DB::table('jadwal')->where('id_jadwal', $request->id_jadwal)->delete();
         return redirect('master-user/mengelola_jadwalpelajaran')->withSuccess('Data berhasil dihapus');
     }
 
+    //================HITUNG PENGGAJIAN=================================================================
+    
+    function mengelolaDataPenggajian(){
+        $data = DB::table('penggajian')->get();
+        $title = "Mengelola Data Penggajian";
+        return view('admin.datapendukung.hitunganpenggajian.mengelola_penggajian', ['title' => $title, 'data' => $data]);
+    }
+
+    function formEditPenggajian(Request $request){
+        $data = DB::table('penggajian')->where('id_penggajian', $request->id_penggajian)->first();
+        $title = "Edit Data Penggajian";
+        return view('admin.datapendukung.hitunganpenggajian.edit_data_penggajian', ['data'=>$data, 'title'=>$title]);
+    }
+
+    function postEditPenggajian(Request $request){
+        DB::table('penggajian')
+            ->where('id_penggajian', $request->id_penggajian)
+            ->update([
+                'total_gaji' => $request -> total_gaji
+            ]);
+        return redirect('master-user/mengelola_penggajian')->withSuccess('Data berhasil diubah');
+    }
+
+    function mengelolaDataAbsensi(){
+        $data = DB::table('absensi')
+                ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+                ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+                ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+                ->leftJoin('penggajian', 'absensi.id_penggajian', '=', 'penggajian.id_penggajian')
+                ->get();
+        $title = "Mengelola Data Penggajian";
+        return view('admin.datapendukung.dataabsensi.mengelola_absensi', ['title' => $title, 'data' => $data]);
+    }
 
 
 

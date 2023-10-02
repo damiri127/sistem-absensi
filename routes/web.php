@@ -61,29 +61,8 @@ Route::group(['middleware' => ['auth', 'ceklevel:Admin,Tata Usaha']], function (
     Route::resource('/master-user/tata-usaha', TataUsahaController::class);
     //MENGELOLA DATA GURU
     Route::resource('/master-user/guru', GuruController::class);
-});
 
-Route::group(['middleware' => ['auth', 'ceklevel:Kepala Sekolah']], function () {
-    // dashboard kepsek routes
-    
-});
-
-Route::group(['middleware' => ['auth', 'ceklevel:Guru']], function () {
-    // dashboard guru routes
-    
-});
-
-Route::group(['middleware' => ['auth', 'ceklevel:Tu']], function () {
-    // dashboard tu routes
-    
-});
-
-
-//================================================================
-
-
-//================================================================//
-//DATA PENDUKUNG
+    //DATA PENDUKUNG
     //Mengelola Program Studi
     Route::get('/master-user/mengelola_programstudi', [DataPendukungController::class, 'mengelolaProgramStudi'])->name('mengelolaProgramStudi');
     Route::get('/master-user/tambah_data_programstudi', [DataPendukungController::class, 'tambah_prodi'])->name('tambah_prodi');
@@ -93,7 +72,6 @@ Route::group(['middleware' => ['auth', 'ceklevel:Tu']], function () {
     Route::get('/master-user/hapus_programstudi/{id_prodi}',[DataPendukungController::class, 'deleteProdi'])->name('deleteProdi');
     Route::get('/master-user/info_programstudi/{id_prodi}',[DataPendukungController::class, 'infoProdi'])->name('infoProdi');
     
-
     //Mengelola data Kelas siswa
     Route::get('/master-user/mengelola_kelas', [DataPendukungController::class, 'mengelolaDataKelas'])->name('mengelolaDataKelas');
     Route::get('/master-user/tambah_data_kelas', [DataPendukungController::class, 'tambah_kelas'])->name('tambah_kelas');
@@ -118,11 +96,31 @@ Route::group(['middleware' => ['auth', 'ceklevel:Tu']], function () {
     Route::post('/master-user/edit_jadwal/{id_jadwal}',[DataPendukungController::class, 'postEditJadwal'])->name('postEditJadwal');
     Route::get('/master-user/hapus_jadwal/{id_jadwal}',[DataPendukungController::class, 'deleteJadwal'])->name('deleteJadwal');
 
+    //Mengelola data Penggajian
+    Route::get('/master-user/mengelola_penggajian', [DataPendukungController::class, 'mengelolaDataPenggajian'])->name('mengelolaDataPenggajian');
+    Route::get('/master-user/edit_data_penggajian/{id_penggajian}',[DataPendukungController::class, 'formEditPenggajian'])->name('FormEditPenggajian');
+    Route::post('/master-user/edit_penggajian/{id_penggajian}',[DataPendukungController::class, 'postEditPenggajian'])->name('postEditPenggajian');
 
+    //Mengelola data Absensi
+    Route::get('/master-user/mengelola_absensi', [DataPendukungController::class, 'mengelolaDataAbsensi'])->name('mengelolaDataAbsensi');
     
-    
+});
 
+Route::group(['middleware' => ['auth', 'ceklevel:Kepala Sekolah']], function () {
+    // dashboard kepsek routes
     
+});
+
+Route::group(['middleware' => ['auth', 'ceklevel:Guru']], function () {
+    // dashboard guru routes
+    
+});
+
+Route::group(['middleware' => ['auth', 'ceklevel:Tu']], function () {
+    // dashboard tu routes
+    
+});
+
 
 // test authentication
 Route::post('/login', [LoginController::class, 'authenticate']);

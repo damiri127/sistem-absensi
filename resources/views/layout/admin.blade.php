@@ -208,7 +208,7 @@
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="/master-user/mengelola_penggajian">
 											<span class="sub-item">Hitungan Penggajian</span>
 										</a>
 									</li>
@@ -216,7 +216,7 @@
 							</div>
 						</li>
 						<li class="nav-item">
-							<a href="#forms">
+							<a href="/master-user/mengelola_absensi">
 								<i class="fas fa-pen-square"></i>
 								<p>Data Absensi</p>
 							</a>
