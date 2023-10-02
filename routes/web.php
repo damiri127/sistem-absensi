@@ -85,35 +85,40 @@ Route::group(['middleware' => ['auth', 'ceklevel:Tu']], function () {
 //================================================================//
 //DATA PENDUKUNG
     //Mengelola Program Studi
-    Route::get('/admin/mengelola_programstudi', [DataPendukungController::class, 'mengelolaProgramStudi'])->name('mengelolaProgramStudi');
-    Route::get('/admin/tambah_data_programstudi', [DataPendukungController::class, 'tambah_prodi'])->name('tambah_prodi');
-    Route::post('/admin/post_prodi', [DataPendukungController::class, 'postTambahProdi'])->name('post_prodi');
-    Route::get('/admin/edit_data_programstudi/{id_prodi}',[DataPendukungController::class, 'formEditProdi'])->name('FormEditProdi');
-    Route::post('/admin/edit_programstudi/{id_prodi}',[DataPendukungController::class, 'postEditProdi'])->name('postEditProdi');
-    Route::get('/admin/hapus_programstudi/{id_prodi}',[DataPendukungController::class, 'deleteProdi'])->name('deleteProdi');
-    Route::get('/admin/info_programstudi/{id_prodi}',[DataPendukungController::class, 'infoProdi'])->name('infoProdi');
+    Route::get('/master-user/mengelola_programstudi', [DataPendukungController::class, 'mengelolaProgramStudi'])->name('mengelolaProgramStudi');
+    Route::get('/master-user/tambah_data_programstudi', [DataPendukungController::class, 'tambah_prodi'])->name('tambah_prodi');
+    Route::post('/master-user/post_prodi', [DataPendukungController::class, 'postTambahProdi'])->name('post_prodi');
+    Route::get('/master-user/edit_data_programstudi/{id_prodi}',[DataPendukungController::class, 'formEditProdi'])->name('FormEditProdi');
+    Route::post('/master-user/edit_programstudi/{id_prodi}',[DataPendukungController::class, 'postEditProdi'])->name('postEditProdi');
+    Route::get('/master-user/hapus_programstudi/{id_prodi}',[DataPendukungController::class, 'deleteProdi'])->name('deleteProdi');
+    Route::get('/master-user/info_programstudi/{id_prodi}',[DataPendukungController::class, 'infoProdi'])->name('infoProdi');
     
 
     //Mengelola data Kelas siswa
-    Route::get('/admin/mengelola_kelas', [DataPendukungController::class, 'mengelolaDataKelas'])->name('mengelolaDataKelas');
-    Route::get('/admin/tambah_data_kelas', [DataPendukungController::class, 'tambah_kelas'])->name('tambah_kelas');
-    Route::post('/admin/post_kelas', [DataPendukungController::class, 'postTambahKelas'])->name('post_kelas');
-    Route::get('/admin/edit_data_kelas/{id_kelas}',[DataPendukungController::class, 'formEditKelas'])->name('FormEditKelas');
-    Route::post('/admin/edit_kelas/{id_kelas}',[DataPendukungController::class, 'postEditKelas'])->name('postEditKelas');
-    Route::get('/admin/hapus_kelas/{id_kelas}',[DataPendukungController::class, 'deleteKelas'])->name('deleteKelas');
+    Route::get('/master-user/mengelola_kelas', [DataPendukungController::class, 'mengelolaDataKelas'])->name('mengelolaDataKelas');
+    Route::get('/master-user/tambah_data_kelas', [DataPendukungController::class, 'tambah_kelas'])->name('tambah_kelas');
+    Route::post('/master-user/post_kelas', [DataPendukungController::class, 'postTambahKelas'])->name('post_kelas');
+    Route::get('/master-user/edit_data_kelas/{id_kelas}',[DataPendukungController::class, 'formEditKelas'])->name('FormEditKelas');
+    Route::post('/master-user/edit_kelas/{id_kelas}',[DataPendukungController::class, 'postEditKelas'])->name('postEditKelas');
+    Route::get('/master-user/hapus_kelas/{id_kelas}',[DataPendukungController::class, 'deleteKelas'])->name('deleteKelas');
 
     //Mengelola data Mata Pelajaran
-    Route::get('/admin/mengelola_matapelajaran', [DataPendukungController::class, 'mengelolaDataMataPelajaran'])->name('mengelolaDataMataPelajaran');
-    Route::get('/admin/tambah_data_matapelajaran', [DataPendukungController::class, 'tambah_matapelajaran'])->name('tambah_mapel');
-    Route::post('/admin/post_mapel', [DataPendukungController::class, 'postTambahMapel'])->name('post_mapel');
-    Route::get('/admin/edit_data_matapelajaran/{id_mapel}',[DataPendukungController::class, 'formEditMapel'])->name('FormEditMapel');
-    Route::post('/admin/edit_matapelajaran/{id_mapel}',[DataPendukungController::class, 'postEditMapel'])->name('postEditMapel');
-    Route::get('/admin/hapus_matapelajaran/{id_mapel}',[DataPendukungController::class, 'deleteMapel'])->name('deleteMapel');
+    Route::get('/master-user/mengelola_matapelajaran', [DataPendukungController::class, 'mengelolaDataMataPelajaran'])->name('mengelolaDataMataPelajaran');
+    Route::get('/master-user/tambah_data_matapelajaran', [DataPendukungController::class, 'tambah_matapelajaran'])->name('tambah_mapel');
+    Route::post('/master-user/post_mapel', [DataPendukungController::class, 'postTambahMapel'])->name('post_mapel');
+    Route::get('/master-user/edit_data_matapelajaran/{id_mapel}',[DataPendukungController::class, 'formEditMapel'])->name('FormEditMapel');
+    Route::post('/master-user/edit_matapelajaran/{id_mapel}',[DataPendukungController::class, 'postEditMapel'])->name('postEditMapel');
+    Route::get('/master-user/hapus_matapelajaran/{id_mapel}',[DataPendukungController::class, 'deleteMapel'])->name('deleteMapel');
 
     //Mengelola Jadwal Pembelajaran 
-    Route::get('/admin/mengelola_jadwalpelajaran', [DataPendukungController::class, 'mengelolaDataJadwal'])->name('mengelolaDataJadwal');
-    Route::get('/admin/tambah_data_jadwalpelajaran', [DataPendukungController::class, 'tambah_jadwal'])->name('tambah_jadwal');
-    Route::post('/admin/post_jadwal', [DataPendukungController::class, 'postTambahJadwal'])->name('post_jadwal');
+    Route::get('/master-user/mengelola_jadwalpelajaran', [DataPendukungController::class, 'mengelolaDataJadwal'])->name('mengelolaDataJadwal');
+    Route::get('/master-user/tambah_data_jadwalpelajaran', [DataPendukungController::class, 'tambah_jadwal'])->name('tambah_jadwal');
+    Route::post('/master-user/post_jadwal', [DataPendukungController::class, 'postTambahJadwal'])->name('post_jadwal');
+    Route::get('/master-user/edit_data_jadwal/{id_jadwal}',[DataPendukungController::class, 'formEditJadwal'])->name('FormEditJadwal');
+    Route::post('/master-user/edit_jadwal/{id_jadwal}',[DataPendukungController::class, 'postEditJadwal'])->name('postEditJadwal');
+    Route::get('/master-user/hapus_jadwal/{id_jadwal}',[DataPendukungController::class, 'deleteJadwal'])->name('deleteJadwal');
+
+
     
     
 

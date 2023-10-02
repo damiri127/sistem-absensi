@@ -11,7 +11,7 @@
                             <div class="col">
                                 <center>
                                     <div>
-                                        <img src="{{asset('fotoadmin/'.$data->image)}}" alt="" class="img-thumbnail w-25">
+                                        <img src="{{asset('fotoadmin/'.$data->image)}}" alt="" class="img-thumbnail" width="15%">
                                     </div>
                                 </center>
                             </div>

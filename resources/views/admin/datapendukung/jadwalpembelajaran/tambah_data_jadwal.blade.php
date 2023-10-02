@@ -6,7 +6,7 @@
                 <h2>Tambah Jadwal Mengajar</h2>
             </div>
             <div class="card-body">
-                <form action="/admin/post_jadwal" method="POST" enctype="multipart/form-data">
+                <form action="/master-user/post_jadwal" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group form-floating-label">
                         <select class="form-control input-border-bottom" id="selectFloatingLabel" name="hari" required>
@@ -100,7 +100,7 @@
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Tambahkan</button>
-                        <a href="/admin/mengelola_jadwalpelajaran" class="btn btn-danger">Kembali</a>
+                        <a href="/master-user/mengelola_jadwalpelajaran" class="btn btn-danger">Kembali</a>
                     </div>
                 </form>
             </div>

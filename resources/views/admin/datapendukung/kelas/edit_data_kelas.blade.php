@@ -6,7 +6,7 @@
                 <h2>Edit Data Kelas Siswa</h2>
             </div>
             <div class="card-body">
-                <form action="/admin/edit_kelas/{{$data->id_kelas}}" method="POST" enctype="multipart/form-data">
+                <form action="/master-user/edit_kelas/{{$data->id_kelas}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group form-floating-label">
                         <select class="form-control input-border-bottom" id="selectFloatingLabel" name="tingkat_kelas" required>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Perbarui</button>
-                        <a href="/admin/mengelola_kelas" class="btn btn-danger">Kembali</a>
+                        <a href="/master-user/mengelola_kelas" class="btn btn-danger">Kembali</a>
                     </div>
                 </form>
             </div>

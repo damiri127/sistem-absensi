@@ -28,8 +28,8 @@
                                     <td>{{ $item->id_kelas }}</td>
                                     <td>{{ $item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
                                     <td>
-                                        <a href="/admin/edit_data_kelas/{{$item->id_kelas}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>
-                                        <a href="/admin/hapus_kelas/{{$item->id_kelas}}" class="btn btn-sm btn-danger" id="hapus_data"><i class="fas fa-trash-alt"></i> <span>Hapus</span></a>
+                                        <a href="/master-user/edit_data_kelas/{{$item->id_kelas}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>
+                                        <a href="/master-user/hapus_kelas/{{$item->id_kelas}}" class="btn btn-sm btn-danger" id="hapus_data"><i class="fas fa-trash-alt"></i> <span>Hapus</span></a>
                                     </td>
                                 </tr>
                             @endforeach

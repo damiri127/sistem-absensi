@@ -30,7 +30,7 @@ class DataPendukungController extends Controller
         DB::table('programstudi')->insert([
             'nama_prodi' => $data
         ]);
-        return redirect('admin/mengelola_programstudi')->withSuccess('Data berhasil ditambahkan');
+        return redirect('master-user/mengelola_programstudi')->withSuccess('Data berhasil ditambahkan');
     }
 
     function formEditProdi(Request $request){
@@ -45,7 +45,7 @@ class DataPendukungController extends Controller
             ->update([
                 'nama_prodi' => $request -> nama_prodi
             ]);
-        return redirect('admin/mengelola_programstudi')->withSuccess('Data berhasil diubah');
+        return redirect('master-user/mengelola_programstudi')->withSuccess('Data berhasil diubah');
     }
 
     function deleteProdi(Request $request){
@@ -56,7 +56,7 @@ class DataPendukungController extends Controller
             DB::table('programstudi')->where('id_prodi', $request->id_prodi)->delete();
             return redirect('admin/mengelola_programstudi')->withSuccess('Data berhasil dihapus');
         } else {
-            return redirect('admin/mengelola_programstudi')->with('Data Gagal Dihapus');
+            return redirect('master-user/mengelola_programstudi')->with('Data Gagal Dihapus');
         }
     }
 
@@ -93,7 +93,7 @@ class DataPendukungController extends Controller
             'grup'=> $request->grup,
             'id_prodi'=>$request->id_prodi 
         ]);
-        return redirect('admin/mengelola_kelas')->withSuccess('Data berhasil ditambahkan');
+        return redirect('master-user/mengelola_kelas')->withSuccess('Data berhasil ditambahkan');
     }
 
     function formEditKelas(Request $request){
@@ -110,12 +110,12 @@ class DataPendukungController extends Controller
                 'tingkat_kelas' => $request->tingkat_kelas,
                 'grup'=> $request->grup
             ]);
-        return redirect('admin/mengelola_kelas')->withSuccess('Data berhasil diubah');
+        return redirect('master-user/mengelola_kelas')->withSuccess('Data berhasil diubah');
     }
 
     function deleteKelas(Request $request){
         DB::table('kelas')->where('id_kelas', $request->id_kelas)->delete();
-        return redirect('admin/mengelola_kelas')->withSuccess('Data berhasil dihapus');
+        return redirect('master-user/mengelola_kelas')->withSuccess('Data berhasil dihapus');
     }
 
     //======================MENGELOLA DATA MATA PELAJARAN=============================
@@ -135,7 +135,7 @@ class DataPendukungController extends Controller
         DB::table('matapelajaran')->insert([
             'nama_mapel'=> $request->nama_mapel
         ]);
-        return redirect('admin/mengelola_matapelajaran')->withSuccess('Data berhasil ditambahkan');
+        return redirect('master-user/mengelola_matapelajaran')->withSuccess('Data berhasil ditambahkan');
     }
 
     function formEditMapel(Request $request){
@@ -150,12 +150,12 @@ class DataPendukungController extends Controller
             ->update([
                 'nama_mapel' => $request -> nama_mapel
             ]);
-        return redirect('admin/mengelola_matapelajaran')->withSuccess('Data berhasil diubah');
+        return redirect('master-user/mengelola_matapelajaran')->withSuccess('Data berhasil diubah');
     }
 
     function deleteMapel(Request $request){
         DB::table('matapelajaran')->where('id_mapel', $request->id_mapel)->delete();
-        return redirect('admin/mengelola_matapelajaran')->withSuccess('Data berhasil dihapus');
+        return redirect('master-user/mengelola_matapelajaran')->withSuccess('Data berhasil dihapus');
     }
 
     //====================Mengelola data Jadwal Pembelajaran===============================
@@ -179,7 +179,6 @@ class DataPendukungController extends Controller
     }
 
     function postTambahJadwal(Request $request){
-
         //Konversi string -> menit
         $jam_mulai = strtotime($request->jam_mulai);
         $jam_selesai = strtotime($request->jam_selesai);
@@ -220,16 +219,59 @@ class DataPendukungController extends Controller
                 'id_guru' => $request->id_guru,
                 'total_jp' => $total_jp
             ]);
-            return redirect('admin/mengelola_jadwalpelajaran')->withSuccess('Data berhasil ditambahkan');   
+            return redirect('master-user/mengelola_jadwalpelajaran')->withSuccess('Data berhasil ditambahkan');   
         }
     }
 
 
     function formEditJadwal(Request $request){
+        $data_mapel = DB::table('matapelajaran')->get();
         $data = DB::table('jadwal')->where('id_jadwal', $request->id_jadwal)->first();
+        $data_kelas = DB::table('kelas')
+                    ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+                    ->get();
+        $data_guru = DB::table('users')->where('level', 'Guru')->get();            
         $title = "Edit Data Jadwal Pembelajaran";
-        return view('admin.datapendukung.jadwalpembelajaran.edit_data_jadwal', ['data'=>$data, 'title'=>$title]);
+        return view('admin.datapendukung.jadwalpembelajaran.edit_data_jadwal', [
+            'data'=>$data, 
+            'title'=>$title, 
+            'data_mapel'=>$data_mapel, 
+            'data_kelas'=>$data_kelas, 
+            "data_guru"=>$data_guru]);
     }
+
+    function postEditJadwal(Request $request){
+        //Konversi string -> menit
+        $jam_mulai = strtotime($request->jam_mulai);
+        $jam_selesai = strtotime($request->jam_selesai);
+        
+        //Get selisih + konversi to menit
+        $selisih = date($jam_selesai - $jam_mulai) / 60 ; 
+
+        if($selisih%40 != 0){
+            return redirect('master-user/edit_data_jadwal/'.$request->id_jadwal)->withSuccess('Pastikan total jam pembelajaran kelipatan 40 menit');
+        } else{
+            $total_jp = $selisih / 40;
+            DB::table('jadwaL')->where('id_jadwal',$request->id_jadwal)->update([
+                'total_jp' => $total_jp,
+                'hari' => $request->hari,
+                'jam_mulai' => $request->jam_mulai,
+                'jam_selesai' => $request->jam_selesai,
+                'id_mapel' => $request->id_mapel,
+                'id_kelas' => $request->id_kelas,
+                'id_guru' => $request->id_guru,
+            ]);
+            return redirect('master-user/mengelola_jadwalpelajaran')->withSuccess('Data berhasil diubah');
+        }
+    }
+
+    
+    function deleteJadwal(Request $request){
+        DB::table('jadwal')->where('id_jadwal', $request->id_jadwal)->delete();
+        return redirect('master-user/mengelola_jadwalpelajaran')->withSuccess('Data berhasil dihapus');
+    }
+
+
 
 
 }

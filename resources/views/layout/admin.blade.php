@@ -188,22 +188,22 @@
 							<div class="collapse" id="sidebarLayouts">
 								<ul class="nav nav-collapse">
 									<li>
-										<a href="/admin/mengelola_programstudi">
+										<a href="/master-user/mengelola_programstudi">
 											<span class="sub-item">Program Studi</span>
 										</a>
 									</li>
 									<li>
-										<a href="/admin/mengelola_kelas">
+										<a href="/master-user/mengelola_kelas">
 											<span class="sub-item">Kelas</span>
 										</a>
 									</li>
 									<li>
-										<a href="/admin/mengelola_matapelajaran">
+										<a href="/master-user/mengelola_matapelajaran">
 											<span class="sub-item">Mata Pelajaran</span>
 										</a>
 									</li>
 									<li>
-										<a href="/admin/mengelola_jadwalpelajaran">
+										<a href="/master-user/mengelola_jadwalpelajaran">
 											<span class="sub-item">Jadwal Pembelajaran</span>
 										</a>
 									</li>

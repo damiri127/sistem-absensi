@@ -3,10 +3,10 @@
     <div class="page-inner">
         <div class="card">
             <div class="card-header">
-                <h2>Tambah Jadwal Mengajar</h2>
+                <h2>Edit Jadwal Mengajar</h2>
             </div>
             <div class="card-body">
-                <form action="/admin/post_jadwal" method="POST" enctype="multipart/form-data">
+                <form action="/master-user/edit_jadwal/{{$data->id_jadwal}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group form-floating-label">
                         <select class="form-control input-border-bottom" id="selectFloatingLabel" name="hari" required>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group form-floating-label">
                         <select class="form-control input-border-bottom" id="selectFloatingLabel" name="jam_selesai" required>
-                            <option value="{{$data->jam_selsai}}">{{$data->jam_selesai}}</option>
+                            <option value="{{$data->jam_selesai}}">{{$data->jam_selesai}}</option>
                             <option value="07:40:00">07:40:00</option>
                             <option value="08:00:00">08:00:00</option>
                             <option value="08:20:00">08:20:00</option>
@@ -70,7 +70,12 @@
 
                     <div class="form-group form-floating-label">
                         <select class="form-control input-border-bottom" id="selectFloatingLabel" name="id_mapel" required>
-                            <option value="{{$data->id_mapel}}"></option>
+                            
+                            @foreach ($data_mapel as $item )
+                                @if ($item->id_mapel == $data->id_mapel)
+                                    <option value="{{$data->id_mapel}}">{{$item->nama_mapel}}</option>
+                                @endif
+                            @endforeach
                             @foreach ($data_mapel as $item )
                                 <option value="{{$item->id_mapel}}">{{$item->nama_mapel}}</option>
                             @endforeach
@@ -80,7 +85,12 @@
 
                     <div class="form-group form-floating-label">
                         <select class="form-control input-border-bottom" id="selectFloatingLabel" name="id_kelas" required>
-                            <option value="">&nbsp;</option>
+                            @foreach ($data_kelas as $item)
+                                @if($item->id_kelas == $data->id_kelas)
+                                    <option value="{{$data->id_kelas}}">{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</option>
+                                @endif
+
+                            @endforeach
                             @foreach ($data_kelas as $item )
                                 <option value="{{$item->id_kelas}}">{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</option>
                             @endforeach
@@ -90,7 +100,11 @@
 
                     <div class="form-group form-floating-label">
                         <select class="form-control input-border-bottom" id="selectFloatingLabel" name="id_guru" required>
-                            <option value="">&nbsp;</option>
+                            @foreach ($data_guru as $item)
+                                @if ($item->id == $data->id_guru)
+                                    <option value="{{$data->id_guru}}">{{$item->nama}}</option>
+                                @endif
+                            @endforeach
                             @foreach ($data_guru as $item )
                                 <option value="{{$item->id}}">{{$item->nama}}</option>
                             @endforeach
@@ -99,8 +113,8 @@
                     </div>
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">Tambahkan</button>
-                        <a href="/admin/mengelola_jadwalpelajaran" class="btn btn-danger">Kembali</a>
+                        <button type="submit" class="btn btn-success">Perbarui</button>
+                        <a href="/master-user/mengelola_jadwalpelajaran" class="btn btn-danger">Kembali</a>
                     </div>
                 </form>
             </div>

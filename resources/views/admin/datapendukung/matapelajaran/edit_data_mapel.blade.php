@@ -6,7 +6,7 @@
                 <h2>Edit Data Mata Pelajaran</h2>
             </div>
             <div class="card-body">
-                <form action="/admin/edit_matapelajaran/{{$data->id_mapel}}" method="POST" enctype="multipart/form-data">
+                <form action="/master-user/edit_matapelajaran/{{$data->id_mapel}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="inputNama">Nama</label>
@@ -14,7 +14,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Perbarui</button>
-                        <a href="/admin/mengelola_matapelajaran" class="btn btn-danger">Kembali</a>
+                        <a href="/master-user/mengelola_matapelajaran" class="btn btn-danger">Kembali</a>
                     </div>
                 </form>
             </div>
