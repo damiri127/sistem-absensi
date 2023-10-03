@@ -10,8 +10,12 @@
                 <h5 class="text-white op-7 mb-2">Sistem  Absensi Guru SMKS Teladan Kertasmaya</h5>
             </div>
             <div class="ml-md-auto py-2 py-md-0">
-                <a href="#" class="btn btn-white btn-border btn-round mr-2">Profil Saya</a>
-                <a href="#" class="btn btn-secondary btn-round">Informasi Absensi</a>
+				@if (auth()->user()->level == "Admin")
+					<a href="/master-user/admin/{{auth()->user()->id}}" class="btn btn-white btn-border btn-round mr-2">Profil Saya</a>
+				@else
+					<a href="/master-user/tata-usaha/{{auth()->user()->id}}" class="btn btn-white btn-border btn-round mr-2">Profil Saya</a>
+				@endif
+                <a href="/master-user/mengelola_absensi" class="btn btn-secondary btn-round">Informasi Absensi</a>
             </div>
         </div>
     </div>
@@ -23,8 +27,8 @@
     <div>
         <div class="card full-height">
             <div class="card-body">
-                <div class="card-title">Aktivitas Admin</div>
-                <div class="card-category">Selasa, 20 September 2023 - Pukul 08.00</div>
+                <div class="card-title">Aktivitas {{auth()->user()->level}}</div>
+                <div class="card-category">{{$now->toRfc850String()}}</div>
                 <div class="mt-3">
                     <div class="row">
 						<div class="col-sm-6 col-md-3">
@@ -39,7 +43,7 @@
 										<div class="col-7 col-stats">
 											<div class="numbers">
 												<p class="card-category">Informasi Pengguna</p>
-												<h4 class="card-title">1,294</h4>
+												<h4 class="card-title">{{$jumlah_user}}</h4>
 											</div>
 										</div>
 									</div>
@@ -58,7 +62,7 @@
 										<div class="col-7 col-stats">
 											<div class="numbers">
 												<p class="card-category">Informasi Absensi</p>
-												<h4 class="card-title">1303</h4>
+												<h4 class="card-title">{{$jumlah_absensi}}</h4>
 											</div>
 										</div>
 									</div>
@@ -77,7 +81,7 @@
 										<div class="col-7 col-stats">
 											<div class="numbers">
 												<p class="card-category">Jadwal Belajar</p>
-												<a href="#"><h4 class="card-title">100</h4></a>
+												<a href="#"><h4 class="card-title">{{$jumlah_jadwal}}</h4></a>
 											</div>
 										</div>
 									</div>
@@ -95,8 +99,8 @@
 										</div>
 										<div class="col-7 col-stats">
 											<div class="numbers">
-												<p class="card-category">Laporan Absensi</p>
-												<h4 class="card-title">576</h4>
+												<p class="card-category">Kelas</p>
+												<h4 class="card-title">{{$jumlah_kelas}}</h4>
 											</div>
 										</div>
 									</div>

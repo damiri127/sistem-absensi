@@ -71,14 +71,23 @@
 												@endif
 											</div>
 											<div class="u-text">
-												<h4>Hizrian</h4>
-												<p class="text-muted">hello@example.com</p><a href="profile.html" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
+												<h4>{{auth()->user()->nama}}</h4>
+												<p class="text-muted">{{auth()->user()->email}}</p>
+												@if (auth()->user()->level == "Admin")
+													<a href="/master-user/admin/{{auth()->user()->id}}" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
+												@else
+													<a href="/master-user/tata-usaha/{{auth()->user()->id}}" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
+												@endif
 											</div>
 										</div>
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#">Pengaturan Akun</a>
+										@if (auth()->user()->level == "Admin")
+											<a class="dropdown-item" href="/master-user/admin/{{auth()->user()->id}}">Pengaturan Akun</a>
+										@else
+											<a class="dropdown-item" href="/master-user/tata-usaha/{{auth()->user()->id}}">Pengaturan Akun</a>
+										@endif
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="/logout">Keluar</a>
 									</li>
@@ -116,9 +125,15 @@
 							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
 									<li>
-										<a href="#edit">
+										@if (auth()->user()->level=='Admin')
+										<a href="/master-user/admin/{{auth()->user()->id}}">
 											<span class="link-collapse">Edit Profile</span>
-										</a>
+										</a> 
+										@else
+										<a href="/master-user/tata-usaha/{{auth()->user()->id}}">
+											<span class="link-collapse">Edit Profile</span>
+										</a> 
+										@endif
 									</li>
 								</ul>
 							</div>
