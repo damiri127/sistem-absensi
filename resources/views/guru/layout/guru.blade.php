@@ -3,7 +3,7 @@
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<!-- Title pada setiap halaman akan berbeda  -->
-	<title>Guru | {{$title}}</title> 
+	<title>Guru</title> 
 	<meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
 	<link rel="icon" href="{{asset("layout_asset/examples/assets/img/logo.jpg")}}" type="image/x-icon"/>
 
@@ -73,21 +73,13 @@
 											<div class="u-text">
 												<h4>{{auth()->user()->nama}}</h4>
 												<p class="text-muted">{{auth()->user()->email}}</p>
-												@if (auth()->user()->level == "Admin")
-													<a href="/master-user/admin/{{auth()->user()->id}}" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
-												@else
-													<a href="/master-user/tata-usaha/{{auth()->user()->id}}" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
-												@endif
+												<a href="#" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
 											</div>
 										</div>
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-										@if (auth()->user()->level == "Admin")
-											<a class="dropdown-item" href="/master-user/admin/{{auth()->user()->id}}">Pengaturan Akun</a>
-										@else
-											<a class="dropdown-item" href="/master-user/tata-usaha/{{auth()->user()->id}}">Pengaturan Akun</a>
-										@endif
+                                        <a class="dropdown-item" href="#">Pengaturan Akun</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="/logout">Keluar</a>
 									</li>
