@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardGuruController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DataPendukungController;
 use App\Http\Controllers\KepalaSekolahController;
@@ -113,13 +114,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:Kepala Sekolah']], function () 
 
 Route::group(['middleware' => ['auth', 'ceklevel:Guru']], function () {
     // dashboard guru routes
-    
+    Route::get('/dashboard-guru',[DashboardGuruController::class, 'indexAction']) -> name('dashboard-guru')->middleware('auth');
 });
 
-Route::group(['middleware' => ['auth', 'ceklevel:Tu']], function () {
-    // dashboard tu routes
-    
-});
 
 
 // test authentication
