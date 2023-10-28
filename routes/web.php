@@ -24,7 +24,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('login');
-});
+})->name('login');
 
 // logout action
 Route::get('/logout', [LoginController::class, 'logoutAction'])->name('logout');
@@ -115,6 +115,15 @@ Route::group(['middleware' => ['auth', 'ceklevel:Kepala Sekolah']], function () 
 Route::group(['middleware' => ['auth', 'ceklevel:Guru']], function () {
     // dashboard guru routes
     Route::get('/dashboard-guru',[DashboardGuruController::class, 'indexAction']) -> name('dashboard-guru')->middleware('auth');
+    Route::get('/guru/profile', [DashboardGuruController::class, 'show'])->name('info-profile')->middleware('auth');
+    Route::get('/guru/form-edit-profile', [DashboardGuruController::class, 'Formedit'])->name('form-edit-profile')->middleware('auth');
+    Route::put('/guru/update-profile', [DashboardGuruController::class, 'update'])->name('update-profile')->middleware('auth');
+    Route::get('/guru/absen/{id_jadwal}', [DashboardGuruController::class, 'absen'])->name('absen')->middleware('auth');
+    Route::post('/guru/postAbsen/{id_jadwal}', [DashboardGuruController::class, 'postAbsen'])->name('postAbsen')->middleware('auth');
+
+    //get Jadwal guru
+    Route::get('/guru/jadwal', [DashboardGuruController::class, 'getJadwal'])->name('getJadwal')->name('getJadwal')->middleware('auth');
+    
 });
 
 

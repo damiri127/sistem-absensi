@@ -54,7 +54,7 @@ class DataPendukungController extends Controller
 
         if ($data_kelas == null){
             DB::table('programstudi')->where('id_prodi', $request->id_prodi)->delete();
-            return redirect('admin/mengelola_programstudi')->withSuccess('Data berhasil dihapus');
+            return redirect('master-user/mengelola_programstudi')->withSuccess('Data berhasil dihapus');
         } else {
             return redirect('master-user/mengelola_programstudi')->with('Data Gagal Dihapus');
         }
@@ -208,7 +208,7 @@ class DataPendukungController extends Controller
             }
         }
         if ($total_jp == 0) {
-            return redirect('admin/mengelola_jadwalpelajaran')->withSuccess('Data gagal ditambahkan!');
+            return redirect('master-user/mengelola_jadwalpelajaran')->withSuccess('Data gagal ditambahkan!');
         } else {
             DB::table('jadwal')->insert([
                 'hari' => $request->hari,

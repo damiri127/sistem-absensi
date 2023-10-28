@@ -73,13 +73,13 @@
 											<div class="u-text">
 												<h4>{{auth()->user()->nama}}</h4>
 												<p class="text-muted">{{auth()->user()->email}}</p>
-												<a href="#" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
+												<a href="/guru/profile" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
 											</div>
 										</div>
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="#">Pengaturan Akun</a>
+                                        <a class="dropdown-item" href="/guru/profile">Pengaturan Akun</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="/logout">Keluar</a>
 									</li>
@@ -117,7 +117,7 @@
 							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
 									<li>
-                                        <a href="#">
+                                        <a href="/guru/profile">
 											<span class="link-collapse">Edit Profile</span>
 										</a> 
 									</li>
@@ -127,7 +127,7 @@
 					</div>
 					<ul class="nav nav-primary">
 						<li class="nav-item {{(request()->is('dashboard'))? 'active' : ''}}">
-							<a href="/dashboard"  aria-expanded="false">
+							<a href="/dashboard-guru"  aria-expanded="false">
 								<i class="fas fa-home"></i>
 								<p>Beranda</p>
 								<!-- <span class="caret"></span> -->
@@ -140,9 +140,9 @@
 							<h4 class="text-section">Data Absensi</h4>
 						</li>
 						<li class="nav-item">
-							<a href="#">
-								<i class="fas fa-pen-square"></i>
-								<p>Absen</p>
+							<a href="/guru/jadwal">
+								<i class="flaticon-calendar"></i>
+								<p>Jadwal</p>
 							</a>
 						</li>
 						<li class="nav-item">

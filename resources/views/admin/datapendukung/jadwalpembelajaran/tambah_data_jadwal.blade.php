@@ -41,6 +41,10 @@
                             <option value="12:40:00">12:40:00</option>
                             <option value="13:20:00">13:20:00</option>
                             <option value="14:00:00">14:00:00</option>
+                            <option value="15:00:00">15:00:00</option>
+                            <option value="16:00:00">16:00:00</option>
+                            <option value="17:00:00">17:00:00</option>
+                            <option value="18:00:00">18:00:00</option>
                         </select>
                         <label for="selectFloatingLabel" class="placeholder">Pilih Jam Mulai</label>
                     </div>
@@ -65,6 +69,10 @@
                             <option value="12:40:00">12:40:00</option>
                             <option value="13:20:00">13:20:00</option>
                             <option value="14:00:00">14:00:00</option>
+                            <option value="15:00:00">15:00:00</option>
+                            <option value="16:00:00">16:00:00</option>
+                            <option value="17:00:00">17:00:00</option>
+                            <option value="18:00:00">18:00:00</option>
                         </select>
                         <label for="selectFloatingLabel" class="placeholder">Pilih Jam Selesai</label>
                     </div>
