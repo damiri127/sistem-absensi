@@ -123,6 +123,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Guru']], function () {
 
     //get Jadwal guru
     Route::get('/guru/jadwal', [DashboardGuruController::class, 'getJadwal'])->name('getJadwal')->name('getJadwal')->middleware('auth');
+    Route::get('guru/riwayatAbsensi', [DashboardGuruController::class, 'riwayatAbsensi'])->name('riwayatAbsensi')->middleware('auth');
     
 });
 
