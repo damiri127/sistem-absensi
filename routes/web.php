@@ -112,6 +112,9 @@ Route::group(['middleware' => ['auth', 'ceklevel:Kepala Sekolah']], function () 
     // dashboard kepsek routes
     Route::get('/dashboard-kepsek',[DashboardController::class, 'indexKepsek']) -> name('dashboard-kepsek')->middleware('auth');
     Route::get('/dashboard-kepsek/laporan', [KepsekController::class,'laporanAbsensi'])->name('laporan-absensi')->middleware('auth');
+    Route::get('/kepala-sekolah/profile', [KepsekController::class, 'show'])->name('info-profile')->middleware('auth');
+    Route::get('/kepala-sekolah/form-edit-profile', [KepsekController::class, 'formEdit'])->name('form-edit-profile')->middleware('auth');
+    Route::put('/kepala-sekolah/update-profile', [KepsekController::class, 'update'])->name('update-profile')->middleware('auth');
 });
 
 Route::group(['middleware' => ['auth', 'ceklevel:Guru']], function () {

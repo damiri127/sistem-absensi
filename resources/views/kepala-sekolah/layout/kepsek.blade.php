@@ -73,13 +73,13 @@
 											<div class="u-text">
 												<h4>{{auth()->user()->nama}}</h4>
 												<p class="text-muted">{{auth()->user()->email}}</p>
-												<a href="/guru/profile" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
+												<a href="/kepala-sekolah/profile" class="btn btn-xs btn-secondary btn-sm">Tampilkan Profil Saya</a>
 											</div>
 										</div>
 									</li>
 									<li>
 										<div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" href="/guru/profile">Pengaturan Akun</a>
+                                        <a class="dropdown-item" href="/kepala-sekolah/profile">Pengaturan Akun</a>
 										<div class="dropdown-divider"></div>
 										<a class="dropdown-item" href="/logout">Keluar</a>
 									</li>
@@ -115,7 +115,7 @@
 							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
 									<li>
-                                        <a href="/guru/profile">
+                                        <a href="/kepala-sekolah/profile">
 											<span class="link-collapse">Edit Profile</span>
 										</a> 
 									</li>
@@ -124,8 +124,8 @@
 						</div>
 					</div>
 					<ul class="nav nav-primary">
-						<li class="nav-item {{(request()->is('dashboard'))? 'active' : ''}}">
-							<a href="/dashboard-guru"  aria-expanded="false">
+						<li class="nav-item {{(request()->is('dashboard-kepsek'))? 'active' : ''}}">
+							<a href="/dashboard-kepsek"  aria-expanded="false">
 								<i class="fas fa-home"></i>
 								<p>Beranda</p>
 								<!-- <span class="caret"></span> -->
@@ -137,7 +137,7 @@
 							</span>
 							<h4 class="text-section">Data Absensi</h4>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item {{ (request()->is('dashboard-kepsek/laporan'))? 'active': '' }}">
 							<a href="/dashboard-kepsek/laporan">
 								<i class="flaticon-calendar"></i>
 								<p>Laporan Absensi</p>

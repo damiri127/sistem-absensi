@@ -6,7 +6,6 @@
                 <h2>Data Absensi</h2>
             </div>
             <div class="card-body">
-                <a href="#" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
                 <div class="table-responsive">
                     <table id="basic-datatables" class="display table table-striped table-hover" >
                         <thead>

@@ -1,14 +1,14 @@
-@extends('guru.layout.guru')
+@extends('kepala-sekolah.layout.kepsek')
 @section('content')
     <div class="page-inner">
-        <a href="/guru/profile" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
+        <a href="/kepala-sekolah/profile" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
         {{-- <h4 class="page-title" class="mb-3">Tambah Data Admin</h4> --}}
         <div class="card">
             <div class="card-header">
-                <h2>Edit Data Guru</h2>
+                <h2>Edit Data Kepala Sekolah</h2>
             </div>
             <div class="card-body">
-                <form method="post" action="/guru/update-profile">
+                <form method="post" action="/kepala-sekolah/update-profile">
                     @csrf
                     <div class="form-group">
                         <label for="inputNama">Nama</label>
@@ -33,7 +33,7 @@
                     <div class="card-footer">
                         @method('PUT')
                         <button type="submit" class="btn btn-success">Perbarui</button>
-                        <a href="/guru/profile" class="btn btn-danger">Kembali</a>
+                        <a href="/kepala-sekolah/profile" class="btn btn-danger">Kembali</a>
                     </div>
                 </form>
             </div>
