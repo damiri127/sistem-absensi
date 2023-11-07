@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 // use App\Models\User;
 // use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 Use \Carbon\Carbon;
-use DB;
+//use DB;
 
 class DashboardController extends Controller
 {
@@ -25,6 +25,13 @@ class DashboardController extends Controller
             'jumlah_kelas' => $jumlah_kelas,
             'jumlah_jadwal' => $jumlah_jadwal,
             'jumlah_absensi'=> $jumlah_absensi
+        ]));
+    }
+
+    public function indexkepsek(){
+        $title = 'Beranda';
+        return (view('kepala-sekolah.index', [
+            'title'=> $title
         ]));
     }
 

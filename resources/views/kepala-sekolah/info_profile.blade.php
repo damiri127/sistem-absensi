@@ -1,9 +1,9 @@
-@extends('guru.layout.guru')
+@extends('kepala-sekolah.layout.kepsek')
 @section('content')
     <div class="page-inner">
         <div class="card ">
             <div class="card-header">
-                <h2>Informasi Data Guru</h2>
+                <h2>Informasi Data Kepala Sekolah</h2>
             </div>
             <div class="card-body">
                 <div class="page-inner">
@@ -47,8 +47,8 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/guru/form-edit-profile" class="btn btn-warning">Edit Data</a>
-                <a href="/dashboard-guru" class="btn btn-danger">Kembali</a>
+                <a href="/kepala-sekolah/form-edit-profile" class="btn btn-warning">Edit Data</a>
+                <a href="/dashboard-kepsek" class="btn btn-danger">Kembali</a>
             </div>
         </div>
         @include('sweetalert::alert')

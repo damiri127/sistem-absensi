@@ -25,7 +25,7 @@ class LoginController extends Controller
             }else if(auth()->user()->level == "Guru"){
                 return redirect()->intended("dashboard-guru");
             }else if(auth()->user()->level == "Kepala Sekolah"){
-                return redirect()->intended("kepala-sekolah");
+                return redirect()->intended("dashboard-kepsek");
             }else if(auth()->user()->level == "Tata Usaha"){
                 return redirect()->intended("dashboard");
             }
