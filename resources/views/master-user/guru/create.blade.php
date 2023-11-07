@@ -1,7 +1,7 @@
 @extends('layout.admin')
 @section('content')
     <div class="page-inner">
-            <a href="/admin/guru" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
+            <a href="/master-user/guru" class="btn btn-danger mb-3"> <i class="flaticon-back"></i> Kembali</a>
             {{-- <h4 class="page-title" class="mb-3">Tambah Data Admin</h4> --}}
         <div class="card">
             <div class="card-header">
