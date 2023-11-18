@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('tahun_ajaran', function (Blueprint $table) {
-            $table->id();
+            $table->id('id_tahun_ajaran');
+            $table->string('tahun_mulai');
+            $table->string('tahun_selesai');
+            $table->boolean('isSemesterGanjil');
             $table->timestamps();
         });
     }
