@@ -14,6 +14,7 @@
                                 <th>Id</th>
                                 <th>Nama</th>
                                 <th>Email</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -22,6 +23,7 @@
                                 <th>Id</th>
                                 <th>Nama</th>
                                 <th>Email</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
@@ -31,6 +33,13 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->nama }}</td>
                                     <td>{{ $item->email }}</td>
+                                    <td>
+                                        @if ($item->is_Active == 1)
+                                            <button class="btn btn-sm btn-success disabled" disabled>Active</button>
+                                        @else
+                                        <button class="btn btn-sm btn-danger disabled" disabled>InActive</button>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="/master-user/guru/{{$item->id}}" class="btn btn-sm btn-info"><i class="fa fa-info-circle"></i> <span>Info</span></a>
                                         <a href="/master-user/guru/{{$item->id}}/edit" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>

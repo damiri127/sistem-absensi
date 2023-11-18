@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('id_mapel')->references('id_mapel')->on('matapelajaran');
             $table->foreignId('id_kelas')->references('id_kelas')->on('kelas');
             $table->foreignId('id_guru')->references('id')->on('users'); //ID Guru didapat pada table users. //
+            // $table->foreignId('id_tahun_ajaran')->references();
             $table->timestamps();
         });
     }
