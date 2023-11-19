@@ -3,7 +3,13 @@
     <div class="page-inner">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Jadwal Mengajar</h3>
+                <h3 class="card-title">Jadwal Mengajar Tahun Ajaran {{$tahun_ajaran->tahun_mulai}} / {{$tahun_ajaran->tahun_selesai}} - Semester 
+                    @if ($tahun_ajaran->isSemesterGanjil)
+                        Ganjil
+                    @else
+                        Genap
+                    @endif
+                </h3>
             </div>
             <div class="card-body">
                 <ul class="nav nav-pills nav-secondary" id="pills-tab" role="tablist">

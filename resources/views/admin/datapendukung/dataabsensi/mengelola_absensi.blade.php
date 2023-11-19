@@ -26,10 +26,16 @@
             </div>
         </div>
 
-        {{-- DATA ABSENSI 2023 BY MONTH --}}
-        <h2>Data Absensi Tahun {{$yearNow}}</h2>
+        {{-- DATA ABSENSI BY MONTH --}}
+        <h2>Data Absensi Tahun Ajaran {{$tahun_ajaran->tahun_mulai}}/{{$tahun_ajaran->tahun_selesai}} - Semester
+            @if ($tahun_ajaran->isSemesterGanjil)
+                Ganjil
+            @else
+                Genap
+            @endif
+        </h2>
         <div class="row">
-            {{-- Semester Genap (July - December) --}}
+            {{-- January - June --}}
             <div class="col">
                 <div class="accordion accordion-secondary">
                     <div class="card">
@@ -40,7 +46,6 @@
                             <h3>Absensi Bulan Januari</h3>
                             <div class="span-mode"></div>
                         </div>
-                
                         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -360,7 +365,7 @@
                                                     {{$item->pendapatan}}
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -370,7 +375,7 @@
         
                 </div>
             </div>
-            {{-- Semester Ganjil (January - June) --}}
+            {{-- July - December --}}
             <div class="col">
                 <div class="accordion accordion-secondary">
 
@@ -410,13 +415,19 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            {{-- @foreach ($dataAbsenDecember as $item)
-                                                <tr>
-                                                    <td>{{$item->waktu_absensi}}</td>
-                                                    <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
-                                                    <td>{{$item->nama_mapel}}</td>
-                                                </tr>
-                                            @endforeach --}}
+                                            @foreach ($dataAbsenJul as $item)
+                                            <tr>
+                                                <td>{{$item->id_absensi}}</td>
+                                                <td>{{$item->waktu_absensi}}</td>
+                                                <td>{{$item->nama}}</td>
+                                                <td>{{$item->nama_mapel}}</td>
+                                                <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
+                                                <td>{{$item->jam_mulai}} - {{$item->jam_selesai}}</td>
+                                                <td>
+                                                    {{$item->pendapatan}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -460,13 +471,19 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            {{-- @foreach ($dataAbsenJuly as $item)
-                                                <tr>
-                                                    <td>{{$item->waktu_absensi}}</td>
-                                                    <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
-                                                    <td>{{$item->nama_mapel}}</td>
-                                                </tr>
-                                            @endforeach --}}
+                                            @foreach ($dataAbsenAugust as $item)
+                                            <tr>
+                                                <td>{{$item->id_absensi}}</td>
+                                                <td>{{$item->waktu_absensi}}</td>
+                                                <td>{{$item->nama}}</td>
+                                                <td>{{$item->nama_mapel}}</td>
+                                                <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
+                                                <td>{{$item->jam_mulai}} - {{$item->jam_selesai}}</td>
+                                                <td>
+                                                    {{$item->pendapatan}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -510,13 +527,19 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            {{-- @foreach ($dataAbsenJuly as $item)
-                                                <tr>
-                                                    <td>{{$item->waktu_absensi}}</td>
-                                                    <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
-                                                    <td>{{$item->nama_mapel}}</td>
-                                                </tr>
-                                            @endforeach --}}
+                                            @foreach ($dataAbsenSept as $item)
+                                            <tr>
+                                                <td>{{$item->id_absensi}}</td>
+                                                <td>{{$item->waktu_absensi}}</td>
+                                                <td>{{$item->nama}}</td>
+                                                <td>{{$item->nama_mapel}}</td>
+                                                <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
+                                                <td>{{$item->jam_mulai}} - {{$item->jam_selesai}}</td>
+                                                <td>
+                                                    {{$item->pendapatan}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -560,13 +583,19 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            {{-- @foreach ($dataAbsenJuly as $item)
-                                                <tr>
-                                                    <td>{{$item->waktu_absensi}}</td>
-                                                    <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
-                                                    <td>{{$item->nama_mapel}}</td>
-                                                </tr>
-                                            @endforeach --}}
+                                            @foreach ($dataAbsenOct as $item)
+                                            <tr>
+                                                <td>{{$item->id_absensi}}</td>
+                                                <td>{{$item->waktu_absensi}}</td>
+                                                <td>{{$item->nama}}</td>
+                                                <td>{{$item->nama_mapel}}</td>
+                                                <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
+                                                <td>{{$item->jam_mulai}} - {{$item->jam_selesai}}</td>
+                                                <td>
+                                                    {{$item->pendapatan}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -610,13 +639,19 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            {{-- @foreach ($dataAbsenJuly as $item)
-                                                <tr>
-                                                    <td>{{$item->waktu_absensi}}</td>
-                                                    <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
-                                                    <td>{{$item->nama_mapel}}</td>
-                                                </tr>
-                                            @endforeach --}}
+                                            @foreach ($dataAbsenNov as $item)
+                                            <tr>
+                                                <td>{{$item->id_absensi}}</td>
+                                                <td>{{$item->waktu_absensi}}</td>
+                                                <td>{{$item->nama}}</td>
+                                                <td>{{$item->nama_mapel}}</td>
+                                                <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
+                                                <td>{{$item->jam_mulai}} - {{$item->jam_selesai}}</td>
+                                                <td>
+                                                    {{$item->pendapatan}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>
@@ -660,13 +695,19 @@
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            {{-- @foreach ($dataAbsenJuly as $item)
-                                                <tr>
-                                                    <td>{{$item->waktu_absensi}}</td>
-                                                    <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
-                                                    <td>{{$item->nama_mapel}}</td>
-                                                </tr>
-                                            @endforeach --}}
+                                            @foreach ($dataAbsenDec as $item)
+                                            <tr>
+                                                <td>{{$item->id_absensi}}</td>
+                                                <td>{{$item->waktu_absensi}}</td>
+                                                <td>{{$item->nama}}</td>
+                                                <td>{{$item->nama_mapel}}</td>
+                                                <td>{{$item->tingkat_kelas}} {{$item->nama_prodi}} {{$item->grup}}</td>
+                                                <td>{{$item->jam_mulai}} - {{$item->jam_selesai}}</td>
+                                                <td>
+                                                    {{$item->pendapatan}}
+                                                </td>
+                                            </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

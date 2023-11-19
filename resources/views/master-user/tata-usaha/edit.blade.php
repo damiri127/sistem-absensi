@@ -26,6 +26,18 @@
                         <label for="inputEmail">Email</label>
                         <input id="inputEmail" type="email" name="email" class="form-control" placeholder="Masukan Alamat Email Tata Usaha" value="{{$data->email}}" required>
                     </div>
+                    <div class="form-group form-floating-label">
+                        <select class="form-control input-border-bottom" id="selectFloatingLabel" name="is_Active" required>
+                            @if ($data->is_Active == 1)
+                                <option value="1">Active</option>
+                            @else
+                                <option value="0">InActive</option>
+                            @endif
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                        </select>
+                        <label for="selectFloatingLabel" class="placeholder">Status</label>
+                    </div>
                     <div class="form-group">
                         <label for="inputPassword">Password</label>
                         <input id="inputPassword" type="password" name="password" class="form-control" placeholder="Masukan Password" value="{{$data->password}}" required>

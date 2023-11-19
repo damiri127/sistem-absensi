@@ -47,6 +47,7 @@ class GuruController extends Controller
         $data->tempat_lahir = $request->tempat_lahir;
         $data->level = 'Guru';
         $data->password = bcrypt($request->password);
+        $data->is_Active = 1;
 
         if($request->hasFile('image')){
             $request->file('image')->move('fotoguru/', $request->file('image')->getClientOriginalName());
@@ -100,6 +101,7 @@ class GuruController extends Controller
         $data->tanggal_lahir = $request->tanggal_lahir;
         $data->tempat_lahir = $request->tempat_lahir;
         $data->password = bcrypt($request->password);
+        $data->is_Active = $request->is_Active;
         $data->save();
 
         return redirect('/master-user/guru')->withSuccess('Data berhasil diubah');
