@@ -23,7 +23,8 @@ class DataPendukungController extends Controller
     function postTambahProdi(Request $request){
         $data = $request -> nama_prodi;
         DB::table('programstudi')->insert([
-            'nama_prodi' => $data
+            'nama_prodi' => $data,
+            'is_active' => 1
         ]);
         return redirect('master-user/mengelola_programstudi')->withSuccess('Data berhasil ditambahkan');
     }
@@ -36,7 +37,8 @@ class DataPendukungController extends Controller
         DB::table('programstudi')
             ->where('id_prodi', $request->id_prodi)
             ->update([
-                'nama_prodi' => $request -> nama_prodi
+                'nama_prodi' => $request -> nama_prodi,
+                'is_active' => $request->is_active
             ]);
         return redirect('master-user/mengelola_programstudi')->withSuccess('Data berhasil diubah');
     }
@@ -72,7 +74,7 @@ class DataPendukungController extends Controller
     }
     //FORM TAMBAH
     function tambah_kelas(){
-        $data_prodi = DB::table('programstudi')->get();
+        $data_prodi = DB::table('programstudi')->where('is_active', 1)->get();
         $title = "Tambah Kelas";
         return view('admin.datapendukung.kelas.tambah_data_kelas', ['title'=>$title, 'data_prodi'=>$data_prodi]);
     }
@@ -88,7 +90,7 @@ class DataPendukungController extends Controller
 
     function formEditKelas(Request $request){
         $data = DB::table('kelas')->where('id_kelas', $request->id_kelas)->first();
-        $data_prodi = DB::table('programstudi')->get();
+        $data_prodi = DB::table('programstudi')->where('is_active', 1)->get();
         $title = "Edit Data Kelas Siswa";
         return view('admin.datapendukung.kelas.edit_data_kelas', ['data'=>$data, 'title'=>$title, 'data_prodi'=>$data_prodi]);
     }
@@ -145,22 +147,26 @@ class DataPendukungController extends Controller
     //====================Mengelola data Jadwal Pembelajaran=============================
 
     function mengelolaDataJadwal(){
+        $tahun_ajaran = DB::table('tahun_ajaran')->orderBy('id_tahun_ajaran', 'desc')->first();
         $data = DB::table('jadwal')
                 ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+                ->where('id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
                 ->get();
         $title = "Mengelola Data Kelas";
-        return view('admin.datapendukung.jadwalpembelajaran.mengelola_jadwal', ['title' => $title, 'data' => $data]);
+        return view('admin.datapendukung.jadwalpembelajaran.mengelola_jadwal', ['title' => $title, 'data' => $data, 'tahun_ajaran' => $tahun_ajaran]);
     }
     function tambah_jadwal(){
         $data_mapel = DB::table('matapelajaran')->get();
         $data_kelas = DB::table('kelas')
                     ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
                     ->get();
-        $data_guru = DB::table('users')->where('level', 'Guru')->get();
+        $data_guru = DB::table('users')->where('level', 'Guru')->where('is_Active', 1)->get();
         $title = "Tambah Kelas";
         return view('admin.datapendukung.jadwalpembelajaran.tambah_data_jadwal', ['title'=>$title, 'data_mapel'=>$data_mapel, 'data_guru'=>$data_guru, 'data_kelas'=>$data_kelas]);
     }
     function postTambahJadwal(Request $request){
+        //Get Tahun Ajaran
+        $tahun_ajaran = DB::table('tahun_ajaran')->orderBy('id_tahun_ajaran', 'desc')->first();
         //Konversi string -> menit
         $jam_mulai = strtotime($request->jam_mulai);
         $jam_selesai = strtotime($request->jam_selesai);
@@ -199,7 +205,8 @@ class DataPendukungController extends Controller
                 'id_mapel' => $request->id_mapel,
                 'id_kelas' => $request->id_kelas,
                 'id_guru' => $request->id_guru,
-                'total_jp' => $total_jp
+                'total_jp' => $total_jp,
+                'id_tahun_ajaran'=>$tahun_ajaran->id_tahun_ajaran
             ]);
             return redirect('master-user/mengelola_jadwalpelajaran')->withSuccess('Data berhasil ditambahkan');   
         }
@@ -210,7 +217,7 @@ class DataPendukungController extends Controller
         $data_kelas = DB::table('kelas')
                     ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
                     ->get();
-        $data_guru = DB::table('users')->where('level', 'Guru')->get();            
+        $data_guru = DB::table('users')->where('is_Active',1)->where('level', 'Guru')->get();            
         $title = "Edit Data Jadwal Pembelajaran";
         return view('admin.datapendukung.jadwalpembelajaran.edit_data_jadwal', [
             'data'=>$data, 
@@ -273,6 +280,8 @@ class DataPendukungController extends Controller
         $dateNow = Carbon::now();
         $dateNow->timezone('Asia/Jakarta');
         $yearNow = $dateNow->format('Y');
+        $tahun_ajaran = DB::table('tahun_ajaran')->orderBy('id_tahun_ajaran', 'desc')->first();
+
 
         $dataAbsenJan = DB::table('absensi')
         ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
@@ -280,6 +289,7 @@ class DataPendukungController extends Controller
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->whereYear('waktu_absensi', $yearNow)
         ->whereMonth('waktu_absensi', '01')
         ->get();
@@ -290,6 +300,7 @@ class DataPendukungController extends Controller
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->whereYear('waktu_absensi', $yearNow)
         ->whereMonth('waktu_absensi', '02')
         ->get();
@@ -300,6 +311,7 @@ class DataPendukungController extends Controller
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->whereYear('waktu_absensi', $yearNow)
         ->whereMonth('waktu_absensi', '03')
         ->get();
@@ -310,6 +322,7 @@ class DataPendukungController extends Controller
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->whereYear('waktu_absensi', $yearNow)
         ->whereMonth('waktu_absensi', '04')
         ->get();
@@ -320,6 +333,7 @@ class DataPendukungController extends Controller
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->whereYear('waktu_absensi', $yearNow)
         ->whereMonth('waktu_absensi', '05')
         ->get();
@@ -330,16 +344,82 @@ class DataPendukungController extends Controller
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->whereYear('waktu_absensi', $yearNow)
         ->whereMonth('waktu_absensi', '06')
         ->get();
 
+        $dataAbsenJul = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '07')
+        ->get();
 
-        
+        $dataAbsenAugust = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '08')
+        ->get();
+
+        $dataAbsenSept = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '09')
+        ->get();
+
+        $dataAbsenOct = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '10')
+        ->get();
+
+        $dataAbsenNov = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '11')
+        ->get();
+
+        $dataAbsenDec = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '12')
+        ->get();
+
 
         $title = "Mengelola Data Penggajian";
         return view('admin.datapendukung.dataabsensi.mengelola_absensi', [
             'title' => $title, 
+            'tahun_ajaran' => $tahun_ajaran,
             'dataAbsenJan' => $dataAbsenJan,
             'yearNow' => $yearNow,
             'dataAbsenFeb'=>$dataAbsenFeb,
@@ -347,7 +427,12 @@ class DataPendukungController extends Controller
             'dataAbsenApr'=>$dataAbsenApr,
             'dataAbsenMei'=>$dataAbsenMei,
             'dataAbsenJun'=>$dataAbsenJun,
-             
+            'dataAbsenJul'=>$dataAbsenJul,
+            'dataAbsenAugust'=>$dataAbsenAugust,
+            'dataAbsenSept'=>$dataAbsenSept,
+            'dataAbsenOct'=>$dataAbsenOct,
+            'dataAbsenNov'=>$dataAbsenNov,
+            'dataAbsenDec'=>$dataAbsenDec             
         ]);
     }
 

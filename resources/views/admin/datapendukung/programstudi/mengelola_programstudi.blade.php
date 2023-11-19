@@ -13,6 +13,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nama</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -20,6 +21,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Nama</th>
+                                <th>Status</th>
                                 <th>Aksi</th>
                             </tr>
                         </tfoot>
@@ -28,6 +30,13 @@
                                 <tr>
                                     <td>{{ $item->id_prodi }}</td>
                                     <td>{{ $item->nama_prodi }}</td>
+                                    <td>
+                                        @if ($item->is_active)
+                                            <a href="#" class="btn btn-sm btn-success disabled">Active</a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-danger disabled">Inactive</a>
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="/master-user/info_programstudi/{{$item->id_prodi}}" class="btn btn-sm btn-info"><i class="fa fa-info-circle"></i> <span>Info</span></a>
                                         <a href="/master-user/edit_data_programstudi/{{$item->id_prodi}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i> <span>Edit</span></a>

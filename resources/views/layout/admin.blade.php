@@ -243,6 +243,12 @@
 								<p>Data Absensi</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="/master-user/riwayat_absensi">
+								<i class="fas fa-calendar"></i>
+								<p>Riwayat Absensi</p>
+							</a>
+						</li>
 						<li class="mx-4 mt-2">
 							<a href="/logout" class="btn btn-default btn-block"><span class="btn-label mr-2"> <i class="fas fa-power-off"></i> </span>Keluar</a> 
 						</li>

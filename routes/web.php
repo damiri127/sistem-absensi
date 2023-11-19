@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardGuruController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\DataPendukungController;
 use App\Http\Controllers\KepalaSekolahController;
+use App\Http\Controllers\RiwayatAbsensiController;
 use App\Http\Controllers\TahunAjaranController;
 use App\Http\Controllers\TataUsahaController;
 use App\Http\Controllers\GuruController;
@@ -114,6 +115,11 @@ Route::group(['middleware' => ['auth', 'ceklevel:Admin,Tata Usaha']], function (
     Route::get('/master-user/edit_tahun_ajaran/{id_tahun_ajaran}', [TahunAjaranController::class, 'edit'])->name('editTahunAjaran');
     Route::post('/master-user/update_tahun_ajaran/{id_tahun_ajaran}', [TahunAjaranController::class, 'update'])->name('updateTahunAjaran');
     Route::get('/master-user/delete_tahun_ajaran/{id_tahun_ajaran}', [TahunAjaranController::class, 'delete'])->name('deleteTahunAjaran');
+
+    //Mengelola Riwayat Absensi 
+    Route::get('/master-user/riwayat_absensi', [RiwayatAbsensiController::class, 'index'])->name('index');
+    Route::get('/master-user/riwayat_absensi_by_semester/{id_tahun_ajaran}', [RiwayatAbsensiController::class, 'getRiwayat'])->name('getRiwayat');
+
 
     
 });

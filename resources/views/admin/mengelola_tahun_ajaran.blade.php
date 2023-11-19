@@ -4,7 +4,7 @@
         <a href="/master-user/tambah_tahun_ajaran" class="btn btn-primary"><i class="fas fa-plus"></i>     Tambah</a>
         <div class="card mt-2">
             <div class="card-header">
-                <h2>Data Mata Pelajaran</h2>
+                <h2>Data Tahun Pelajaran</h2>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -40,7 +40,6 @@
                                 <td>
                                     <a href="/master-user/edit_tahun_ajaran/{{$item->id_tahun_ajaran}}" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i><span>Edit</span></a>
                                     <a href="/master-user/delete_tahun_ajaran/{{$item->id_tahun_ajaran}}" class="btn btn-sm btn-danger" id="hapus_data"><i class="fas fa-trash-alt"></i> <span>Hapus</span></a>
-
                                 </td>
                             </tr>
                             @endforeach
