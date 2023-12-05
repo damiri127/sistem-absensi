@@ -26,7 +26,7 @@
 			      	<div class="d-flex">
 			      		<div class="w-100 ">
 							<center>
-								<h4 class="mb-2">SISTEM ABSENSI - GURU</h4> SMK TELADAN KERTASMAYA <div class="mb-4"></div>
+								<h4 class="mb-2">SISTEM ABSENSI - GURU</h4> SMK TELADAN KERTASEMAYA <div class="mb-4"></div>
 							</center>
 			      		</div>
 								<!-- <div class="w-100">
