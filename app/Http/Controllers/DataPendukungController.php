@@ -238,7 +238,7 @@ class DataPendukungController extends Controller
             return redirect('master-user/edit_data_jadwal/'.$request->id_jadwal)->withSuccess('Pastikan total jam pembelajaran kelipatan 40 menit');
         } else{
             $total_jp = $selisih / 40;
-            DB::table('jadwaL')->where('id_jadwal',$request->id_jadwal)->update([
+            DB::table('jadwal')->where('id_jadwal',$request->id_jadwal)->update([
                 'total_jp' => $total_jp,
                 'hari' => $request->hari,
                 'jam_mulai' => $request->jam_mulai,
