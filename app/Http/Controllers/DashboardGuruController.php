@@ -9,11 +9,13 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardGuruController extends Controller
 {
+    
     public function indexAction(Request $request){
 
         $dateNow = Carbon::now();
         $dateNow->timezone('Asia/Jakarta');
         $dayNow = $dateNow->dayName;
+        $tahun_ajaran = DB::table('tahun_ajaran')->orderBy('id_tahun_ajaran', 'desc')->first();
         
         switch ($dayNow){
             case "Monday":
@@ -46,6 +48,7 @@ class DashboardGuruController extends Controller
         $getIdGuru = auth()->user()->id;
         $dataAbsenToday = DB::table('absensi')
                         ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal') 
+                        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
                         ->where('waktu_absensi', $dateInfo)
                         ->where('jadwal.id_guru', $getIdGuru)
                         ->get();
@@ -56,6 +59,7 @@ class DashboardGuruController extends Controller
                 ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
                 ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
                 ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+                ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
                 ->where('jadwal.hari', $dayNow)
                 ->where('id_guru', $getIdGuru)
                 ->orderBy('jam_mulai', 'asc')->get();
@@ -175,40 +179,48 @@ class DashboardGuruController extends Controller
 
     function getJadwal(){
         $getIdGuru = auth()->user()->id;
+        $tahun_ajaran = DB::table('tahun_ajaran')->orderBy('id_tahun_ajaran', 'desc')->first();
+
         $jadwalSenin = DB :: table('jadwal')->where('hari', 'Senin')->where('id_guru', $getIdGuru)
                                             ->leftJoin('matapelajaran','jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
                                             ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
                                             ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+                                            ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
                                             ->get();
 
         $jadwalSelasa = DB :: table('jadwal')->where('hari', 'Selasa')->where('id_guru', $getIdGuru)
                                             ->leftJoin('matapelajaran','jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
                                             ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
                                             ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+                                            ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
                                             ->get();
 
         $jadwalRabu = DB :: table('jadwal')->where('hari', 'Rabu')->where('id_guru', $getIdGuru)
                                         ->leftJoin('matapelajaran','jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
                                         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
                                         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+                                        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
                                         ->get();
 
         $jadwalKamis = DB :: table('jadwal')->where('hari', 'Kamis')->where('id_guru', $getIdGuru)
                                             ->leftJoin('matapelajaran','jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
                                             ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
                                             ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+                                            ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
                                             ->get();
 
         $jadwalJumat = DB :: table('jadwal')->where('hari', 'Jumat')->where('id_guru', $getIdGuru)
                                             ->leftJoin('matapelajaran','jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
                                             ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
                                             ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+                                            ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
                                             ->get();
 
         $jadwalSabtu = DB :: table('jadwal')->where('hari', 'Sabtu')->where('id_guru', $getIdGuru)
                                             ->leftJoin('matapelajaran','jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
                                             ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
                                             ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+                                            ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
                                             ->get();
         
         
@@ -221,86 +233,182 @@ class DashboardGuruController extends Controller
             'jadwalKamis'=>$jadwalKamis,
             'jadwalJumat'=> $jadwalJumat,
             'jadwalSabtu'=>$jadwalSabtu,
+            'tahun_ajaran'=>$tahun_ajaran
         ]);
     }
 
     function riwayatAbsensi(){
 
-        $dataAbsenJune = DB::table('absensi')
+        $dateNow = Carbon::now();
+        $dateNow->timezone('Asia/Jakarta');
+        $yearNow = $dateNow->format('Y');
+        $tahun_ajaran = DB::table('tahun_ajaran')->orderBy('id_tahun_ajaran', 'desc')->first();
+
+
+        $dataAbsenJan = DB::table('absensi')
         ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
-        ->whereMonth('waktu_absensi', '06')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '01')
         ->get();
 
-        $dataAbsenJuly = DB::table('absensi')
+        $dataAbsenFeb = DB::table('absensi')
         ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
-        ->whereMonth('waktu_absensi', '07')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '02')
+        ->get();
+
+        $dataAbsenMar = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '03')
+        ->get();
+
+        $dataAbsenApr = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '04')
+        ->get();
+
+        $dataAbsenMei = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '05')
+        ->get();
+
+        $dataAbsenJun = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '06')
+        ->get();
+
+        $dataAbsenJul = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '07')
         ->get();
 
         $dataAbsenAugust = DB::table('absensi')
         ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
         ->whereMonth('waktu_absensi', '08')
-        ->where('jadwal.id_guru', auth()->user()->id)
         ->get();
 
-        $dataAbsenSeptember = DB::table('absensi')
+        $dataAbsenSept = DB::table('absensi')
         ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
         ->whereMonth('waktu_absensi', '09')
-        ->where('jadwal.id_guru', auth()->user()->id)
         ->get();
-        
 
-        $dataAbsenOctober = DB::table('absensi')
-                        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
-                        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
-                        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
-                        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
-                        ->whereMonth('waktu_absensi', 10)
-                        ->where('jadwal.id_guru', auth()->user()->id)
-                        ->get();
-
-
-        $dataAbsenNovember = DB::table('absensi')
+        $dataAbsenOct = DB::table('absensi')
         ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
-        ->whereMonth('waktu_absensi', 11)
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '10')
         ->get();
 
-        $dataAbsenDecember = DB::table('absensi')
+        $dataAbsenNov = DB::table('absensi')
         ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
         ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
         ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
         ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
-        ->whereMonth('waktu_absensi', 12)
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
         ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '11')
+        ->get();
+
+        $dataAbsenDec = DB::table('absensi')
+        ->leftJoin('jadwal', 'absensi.id_jadwal', '=', 'jadwal.id_jadwal')
+        ->leftJoin('users', 'jadwal.id_guru', '=', 'users.id')
+        ->leftJoin('kelas', 'jadwal.id_kelas', '=', 'kelas.id_kelas')
+        ->leftJoin('programstudi', 'kelas.id_prodi', '=', 'programstudi.id_prodi')
+        ->leftJoin('matapelajaran', 'jadwal.id_mapel', '=', 'matapelajaran.id_mapel')
+        ->where('jadwal.id_tahun_ajaran', $tahun_ajaran->id_tahun_ajaran)
+        ->where('jadwal.id_guru', auth()->user()->id)
+        ->whereYear('waktu_absensi', $yearNow)
+        ->whereMonth('waktu_absensi', '12')
         ->get();
 
 
+        $title = "Mengelola Data Penggajian";
         return view('guru.history_absensi', [
-            'dataAbsenOctober'=>$dataAbsenOctober,
-            'dataAbsenJune'=>$dataAbsenJune,
-            'dataAbsenJuly'=>$dataAbsenJuly,
+            'title' => $title, 
+            'tahun_ajaran' => $tahun_ajaran,
+            'dataAbsenJan' => $dataAbsenJan,
+            'yearNow' => $yearNow,
+            'dataAbsenFeb'=>$dataAbsenFeb,
+            'dataAbsenMar'=>$dataAbsenMar,
+            'dataAbsenApr'=>$dataAbsenApr,
+            'dataAbsenMei'=>$dataAbsenMei,
+            'dataAbsenJun'=>$dataAbsenJun,
+            'dataAbsenJul'=>$dataAbsenJul,
             'dataAbsenAugust'=>$dataAbsenAugust,
-            'dataAbsenSeptember'=>$dataAbsenSeptember,
-            'dataAbsenNovember'=>$dataAbsenNovember,
-            'dataAbsenDecember'=>$dataAbsenDecember
+            'dataAbsenSept'=>$dataAbsenSept,
+            'dataAbsenOct'=>$dataAbsenOct,
+            'dataAbsenNov'=>$dataAbsenNov,
+            'dataAbsenDec'=>$dataAbsenDec             
         ]);
+    
     }
 
 

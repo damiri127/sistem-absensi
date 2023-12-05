@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('level',['Admin','Guru','Kepala Sekolah','Tata Usaha']);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_Active');
             $table->rememberToken();
             $table->timestamps();
         });

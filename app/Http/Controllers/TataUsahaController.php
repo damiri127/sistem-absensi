@@ -47,6 +47,7 @@ class TataUsahaController extends Controller
         $data->tempat_lahir = $request->tempat_lahir;
         $data->level = 'Tata Usaha';
         $data->password = bcrypt($request->password);
+        $data->is_Active = 1;
 
         if($request->hasFile('image')){
             $request->file('image')->move('fototatausaha/', $request->file('image')->getClientOriginalName());
@@ -100,6 +101,7 @@ class TataUsahaController extends Controller
         $data->tanggal_lahir = $request->tanggal_lahir;
         $data->tempat_lahir = $request->tempat_lahir;
         $data->password = bcrypt($request->password);
+        $data->is_Active = $request->is_Active;
         $data->save();
 
         return redirect('/master-user/tata-usaha')->withSuccess('Data berhasil diubah');

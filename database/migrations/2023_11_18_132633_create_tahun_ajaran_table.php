@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('penggajian', function (Blueprint $table) {
-            $table->id('id_penggajian');
-            $table->enum('keterangan',['Hadir', 'Tidak Hadir', 'Izin']); // H = Hadir | TH = Tidak Hadir | I = Izin 
-            $table->integer('total_gaji'); // Total gaji akan diinputkan untuk setiap satu jam pertemuan (40 menit)
+        Schema::create('tahun_ajaran', function (Blueprint $table) {
+            $table->id('id_tahun_ajaran');
+            $table->string('tahun_mulai');
+            $table->string('tahun_selesai');
+            $table->boolean('isSemesterGanjil');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('penggajian');
+        Schema::dropIfExists('tahun_ajaran');
     }
 };

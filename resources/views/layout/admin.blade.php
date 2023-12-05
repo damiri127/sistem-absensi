@@ -147,6 +147,13 @@
 								<!-- <span class="caret"></span> -->
 							</a>
 						</li>
+						<li class="nav-item {{(request()->is('master-user/mengelola_tahun_ajaran'))? 'active' : ''}}">
+							<a href="/master-user/mengelola_tahun_ajaran"  aria-expanded="false">
+								<i class="fas fa-calendar"></i>
+								<p>Tahun Ajaran</p>
+								<!-- <span class="caret"></span> -->
+							</a>
+						</li>
 						<li class="nav-section">
 							<span class="sidebar-mini-icon">
 								<i class="fa fa-ellipsis-h"></i>
@@ -234,6 +241,12 @@
 							<a href="/master-user/mengelola_absensi">
 								<i class="fas fa-pen-square"></i>
 								<p>Data Absensi</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="/master-user/riwayat_absensi">
+								<i class="fas fa-calendar"></i>
+								<p>Riwayat Absensi</p>
 							</a>
 						</li>
 						<li class="mx-4 mt-2">
